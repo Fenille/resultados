@@ -12,7 +12,6 @@
       --cinza-medio:#777;
       --bg:#000;
       --card-bg:rgba(10,10,15,0.96);
-      --gap:20px;
       --radius:14px;
       --shadow-soft:0 14px 40px rgba(0,0,0,0.8);
     }
@@ -27,7 +26,7 @@
       display: flex;
       justify-content: center;
       align-items: flex-start;
-      padding: 24px 10px 40px;
+      padding: 20px 8px 32px;
     }
 
     .shell{
@@ -36,7 +35,7 @@
       background: radial-gradient(circle at top, #1c1c1c 0, #050509 55%, #000 100%);
       border-radius:22px;
       border:1px solid #444;
-      padding:22px 18px 28px;
+      padding:18px 14px 24px;
       box-shadow:0 0 28px rgba(0,0,0,0.95);
       position:relative;
       overflow:hidden;
@@ -58,42 +57,42 @@
     header{
       display:flex;
       flex-wrap:wrap;
-      align-items:center;
+      align-items:flex-start;
       justify-content:space-between;
-      margin-bottom:18px;
-      padding-bottom:12px;
+      margin-bottom:12px;
+      padding-bottom:10px;
       border-bottom:1px solid rgba(255,255,255,0.08);
+      gap:4px;
     }
 
     .titulo{
-      font-size:1.4rem;
+      font-size:1.35rem;
       font-weight:700;
       text-shadow:0 0 8px rgba(255,255,0,0.55);
       text-transform:uppercase;
     }
 
     .subtitulo{
-      font-size:0.86rem;
+      font-size:0.84rem;
       color:var(--cinza);
       text-transform:uppercase;
-      letter-spacing:0.15em;
+      letter-spacing:0.13em;
     }
 
     .badge{
-      font-size:0.75rem;
+      font-size:0.74rem;
       padding:4px 10px;
       border-radius:999px;
       border:1px solid rgba(255,255,255,0.22);
-      background:linear-gradient(120deg, rgba(255,255,255,0.04), rgba(0,0,0,0.65));
-      text-transform:uppercase;
-      letter-spacing:0.16em;
       color:var(--cinza);
+      margin-top:4px;
     }
 
+    /* BOTÕES TOPO (apenas 2) */
     .tabs-top{
       display:flex;
-      gap:10px;
-      margin-bottom:16px;
+      gap:8px;
+      margin-bottom:14px;
       flex-wrap:wrap;
     }
 
@@ -104,7 +103,7 @@
       background:radial-gradient(circle at top, rgba(255,255,255,0.06), rgba(0,0,0,0.88));
       padding:10px 14px;
       text-transform:uppercase;
-      letter-spacing:0.16em;
+      letter-spacing:0.15em;
       cursor:pointer;
       color:var(--cinza);
       display:flex;
@@ -122,8 +121,6 @@
       box-shadow:0 0 22px rgba(255,255,0,0.5);
     }
 
-    .tab-btn span.icon{ font-size:1rem; }
-
     .section{ display:none; margin-top:4px; }
     .section.active{ display:block; }
 
@@ -138,29 +135,29 @@
     .card h2{
       font-size:1.05rem;
       text-transform:uppercase;
-      margin-bottom:10px;
-      letter-spacing:0.16em;
+      margin-bottom:8px;
+      letter-spacing:0.12em;
     }
 
     .card p.desc{
-      font-size:0.85rem;
+      font-size:0.8rem;
       color:var(--cinza);
-      margin-bottom:14px;
+      margin-bottom:10px;
     }
 
     .form-row{
       display:flex;
-      gap:12px;
-      margin-bottom:10px;
       flex-wrap:wrap;
+      gap:10px;
+      margin-bottom:10px;
     }
 
     .field{
       flex:1 1 160px;
+      min-width:140px;
       display:flex;
       flex-direction:column;
       gap:4px;
-      min-width:150px;
       font-size:0.85rem;
     }
 
@@ -168,16 +165,16 @@
       text-transform:uppercase;
       font-size:0.75rem;
       color:var(--cinza);
-      letter-spacing:0.14em;
+      letter-spacing:0.12em;
     }
 
     .field input,
     .field select{
       border-radius:999px;
       border:1px solid rgba(255,255,255,0.25);
-      background:rgba(0,0,0,0.75);
+      background:rgba(0,0,0,0.85);
       color:var(--amarelo-neon);
-      padding:8px 13px;
+      padding:7px 11px;
       font-size:0.9rem;
       outline:none;
       text-align:left;
@@ -189,23 +186,23 @@
       box-shadow:0 0 0 1px rgba(255,255,0,0.35);
     }
 
-    .readonly-value{
-      background:rgba(10,10,10,0.9);
-    }
-
     .grupo-titulo{
-      margin-top:14px;
+      margin-top:12px;
       margin-bottom:4px;
       padding-top:8px;
-      border-top:1px solid rgba(255,255,255,0.14);
+      border-top:1px solid rgba(255,255,255,0.16);
       font-size:0.86rem;
       color:var(--cinza);
       text-transform:uppercase;
       letter-spacing:0.14em;
     }
 
+    .readonly-value{
+      background:rgba(5,5,5,0.95);
+    }
+
     .form-actions{
-      margin-top:12px;
+      margin-top:10px;
       display:flex;
       flex-wrap:wrap;
       gap:10px;
@@ -214,7 +211,7 @@
 
     .btn{
       border-radius:999px;
-      padding:9px 18px;
+      padding:8px 16px;
       border:1px solid rgba(255,255,255,0.3);
       text-transform:uppercase;
       cursor:pointer;
@@ -243,12 +240,6 @@
       padding:4px 10px;
       font-size:0.7rem;
       letter-spacing:0.08em;
-    }
-
-    .btn:disabled{
-      opacity:0.5;
-      cursor:not-allowed;
-      box-shadow:none;
     }
 
     .alert{
@@ -283,19 +274,17 @@
       width:100%;
       border-collapse:collapse;
       margin-top:8px;
-      font-size:0.8rem;
+      font-size:0.78rem;
     }
 
     thead{ background:rgba(255,255,255,0.06); }
 
     th,td{
-      padding:6px 6px;
+      padding:5px 4px;
       border-bottom:1px solid rgba(255,255,255,0.08);
-      text-align:right;
+      text-align:center;   /* números E texto centralizados */
       white-space:nowrap;
     }
-
-    th:first-child, td:first-child{ text-align:left; }
 
     .muted{
       color:var(--cinza-medio);
@@ -304,93 +293,89 @@
     }
 
     /* MOBILE BEM COMPACTO */
-@media(max-width:720px){
+    @media(max-width:720px){
 
-  .shell{
-    padding:12px 8px 16px;
-    border-radius:16px;
-  }
+      body{
+        padding:10px 4px 18px;
+      }
 
-  header{
-    flex-direction:column;
-    align-items:flex-start;
-    gap:4px;
-    margin-bottom:10px;
-    padding-bottom:6px;
-  }
+      .shell{
+        padding:14px 10px 18px;
+        border-radius:18px;
+      }
 
-  .titulo{ font-size:1.05rem; }
+      header{
+        flex-direction:column;
+        gap:3px;
+        margin-bottom:8px;
+        padding-bottom:6px;
+      }
 
-  .tabs-top{
-    flex-direction:column;
-    gap:4px;
-    margin-bottom:8px;
-  }
+      .titulo{ font-size:1.1rem; }
+      .subtitulo{ font-size:0.74rem; }
 
-  .tab-btn{
-    padding:7px 10px;
-    font-size:0.78rem;
-  }
+      .tabs-top{
+        flex-direction:column;
+        gap:4px;
+        margin-bottom:8px;
+      }
 
-  .card{
-    padding:10px 8px;
-  }
+      .tab-btn{
+        padding:7px 10px;
+        font-size:0.78rem;
+      }
 
-  .card p.desc{
-    font-size:0.76rem;
-    margin-bottom:8px;
-  }
+      .card{
+        padding:12px 10px;
+      }
 
-  /* >>> AQUI É ONDE APERTA OS CAMPOS <<< */
-  .form-row{
-    flex-direction:column;
-    gap:2px !important;
-    margin-bottom:2px !important;
-  }
+      .card p.desc{
+        font-size:0.76rem;
+        margin-bottom:6px;
+      }
 
-  .field{
-    min-width:100%;
-    margin-bottom:0 !important;
-    gap:1px;
-  }
+      .form-row{
+        flex-direction:column;
+        gap:2px !important;
+        margin-bottom:2px !important;
+      }
 
-  .field label{
-    font-size:0.64rem !important;
-    letter-spacing:0.06em !important;
-    margin-bottom:0 !important;
-  }
+      .field{
+        min-width:100%;
+        gap:1px !important;
+        margin-bottom:0 !important;
+      }
 
-  .field input,
-  .field select{
-    padding:4px 8px !important;
-    font-size:0.78rem;
-    line-height:1.1;
-  }
+      .field label{
+        font-size:0.66rem !important;
+        letter-spacing:0.09em !important;
+        margin-bottom:0 !important;
+      }
 
-  .readonly-value{
-    font-size:0.76rem !important;
-  }
+      .field input,
+      .field select{
+        padding:4px 8px !important;
+        font-size:0.78rem;
+      }
 
-  .grupo-titulo{
-    margin-top:6px !important;
-    margin-bottom:2px !important;
-    padding-top:2px;
-    font-size:0.76rem;
-  }
+      .grupo-titulo{
+        margin-top:6px !important;
+        margin-bottom:2px !important;
+        padding-top:2px;
+        font-size:0.78rem;
+      }
 
-  .btn{
-    width:100%;
-    justify-content:center;
-    padding:7px 10px;
-    font-size:0.76rem;
-  }
+      .btn{
+        width:100%;
+        justify-content:center;
+        padding:7px 10px;
+      }
 
-  th,td{
-    font-size:0.7rem;
-    padding:4px 3px;
-  }
-}
-
+      th,td{
+        font-size:0.7rem;
+        padding:3px 2px;
+      }
+    }
   </style>
 </head>
 <body>
@@ -406,22 +391,16 @@
 
       <!-- APENAS 2 BOTÕES SUPERIORES -->
       <div class="tabs-top">
-        <button class="tab-btn active" data-target="form">
-          <span class="icon">✏️</span><span>Lançar Resultado</span>
-        </button>
-        <button class="tab-btn" data-target="view">
-          <span class="icon">📊</span><span>Visualizar Resultados</span>
-        </button>
+        <button class="tab-btn active" data-target="form">✏️ Lançar Resultado</button>
+        <button class="tab-btn" data-target="view">📊 Visualizar Resultados</button>
       </div>
 
-      <!-- TELA DE LANÇAMENTO -->
+      <!-- ===================== FORMULÁRIO ===================== -->
       <section id="form" class="section active">
         <div class="card">
           <h2 id="tituloForm">Lançamento de Resultados</h2>
           <p class="desc" id="descForm">
             Preencha os dados da operação e lance os resultados da viatura.
-            Todos os campos numéricos aceitam zero. Os dados ficarão disponíveis
-            no resumo por município e total da 2ª Cia.
           </p>
 
           <div id="editBanner" class="alert ok"></div>
@@ -463,7 +442,7 @@
 
             <div class="form-actions">
               <button type="button" class="btn danger" id="btnLimpar">
-                Limpar campos / Sair da edição
+                Limpar / Sair da edição
               </button>
               <button type="submit" class="btn primary" id="btnSalvar">
                 Salvar lançamento
@@ -475,13 +454,12 @@
         </div>
       </section>
 
-      <!-- TELA DE VISUALIZAÇÃO -->
+      <!-- ===================== VISUALIZAÇÃO ===================== -->
       <section id="view" class="section">
         <div class="card">
           <h2>Visualização de Resultados</h2>
           <p class="desc">
-            Selecione a data e, opcionalmente, um município específico ou toda a 2ª Companhia.
-            Abaixo, você pode visualizar o resumo e editar lançamentos de viaturas.
+            Filtre por data e, se desejar, por município. Abaixo você pode editar lançamentos por viatura.
           </p>
 
           <div class="filters">
@@ -503,26 +481,19 @@
                 <option>Iepê</option>
               </select>
             </div>
-            <button class="btn" id="btnAtualizarResumo">
-              Atualizar resumo
-            </button>
+            <button class="btn" id="btnAtualizarResumo">Atualizar resumo</button>
           </div>
 
           <div id="semDadosResumo" class="muted">
-            Nenhum lançamento encontrado para a data selecionada.
+            Nenhum lançamento encontrado para o filtro selecionado.
           </div>
 
           <div id="tabelasResumo" style="display:none;">
-            <h3 style="font-size:0.9rem;margin-top:6px;">Resumo dos indicadores</h3>
+            <h3 style="font-size:0.9rem;margin-top:4px;">Resumo dos indicadores</h3>
             <div id="resumoCampos"></div>
-            <p class="muted" id="textoRodapeResumo">
-              Resumo consolidado da data selecionada.
-            </p>
 
             <h3 style="font-size:0.9rem;margin-top:12px;">Lançamentos detalhados (por viatura)</h3>
-            <p class="muted" style="margin-top:2px;">
-              Clique em <strong>Editar</strong> na linha desejada para ajustar o lançamento da viatura.
-            </p>
+            <p class="muted">Clique em <strong>Editar</strong> para ajustar um lançamento.</p>
             <div style="overflow-x:auto;">
               <table id="tabelaDetalhes"></table>
             </div>
@@ -535,7 +506,6 @@
   <script>
     const DB_URL = "https://resultados-1c75f-default-rtdb.firebaseio.com";
 
-    // Controle de modo edição
     let editingKey = null;
     let editingLancamento = null;
 
@@ -594,24 +564,24 @@
         campos: [
           { id: "acidente_sem_vitima", label: "Acidente de trânsito sem vítima" },
           { id: "acidente_com_vitima", label: "Acidente de trânsito com vítima" },
-          { id: "vitimas_nao_fatais", label: "Quantitativo de vítimas não fatais de acidentes de trânsito" },
-          { id: "vitimas_fatais", label: "Quantitativo de vítimas fatais de acidentes de trânsito" },
+          { id: "vitimas_nao_fatais", label: "Vítimas não fatais de acidentes de trânsito" },
+          { id: "vitimas_fatais", label: "Vítimas fatais de acidentes de trânsito" },
           { id: "total_condutores_abordados", label: "Total de condutores abordados" },
-          { id: "autos_infracao_exceto_artigos", label: "Autos de infração lavrados - Exceto Artigo (165, 165-A, 228 e 253-A)" },
-          { id: "autos_art_165", label: "Autos de infração - Art. 165 do CTB" },
-          { id: "autos_art_165a", label: "Autos de infração - Art. 165-A do CTB" },
-          { id: "autos_art_228", label: "Autos de infração - Art. 228 do CTB" },
-          { id: "bloqueios_transito", label: "Quantidade de Bloqueios de trânsito realizados" },
-          { id: "pontos_visibilidade", label: "Quantidade de pontos de visibilidade realizados" },
+          { id: "autos_infracao_exceto_artigos", label: "Autos de infração - exceto 165, 165-A, 228 e 253-A" },
+          { id: "autos_art_165", label: "Autos de infração - Art. 165" },
+          { id: "autos_art_165a", label: "Autos de infração - Art. 165-A" },
+          { id: "autos_art_228", label: "Autos de infração - Art. 228" },
+          { id: "bloqueios_transito", label: "Bloqueios de trânsito realizados" },
+          { id: "pontos_visibilidade", label: "Pontos de visibilidade realizados" },
           { id: "testes_etilometro", label: "Testes de Etilômetro realizados" },
           { id: "recusa_etilometro", label: "Recusa dos testes de Etilômetro" },
           { id: "flagrantes_art_306", label: "Flagrantes pelo Art. 306 do CTB" },
-          { id: "veiculos_auto_vistoriados", label: "Veículos vistoriados (Automóveis) não removidos" },
-          { id: "veiculos_moto_vistoriados", label: "Veículos vistoriados (Motocicletas) não removidos" },
-          { id: "veiculos_auto_removidos", label: "Veículos removidos administrativamente (Automóveis)" },
-          { id: "veiculos_moto_removidos", label: "Veículos removidos administrativamente (Motocicletas)" },
-          { id: "veiculos_auto_ilicito", label: "Veículos (Automóveis) produto de ilícito" },
-          { id: "veiculos_moto_ilicito", label: "Veículos (Motocicleta) produto de ilícito" }
+          { id: "veiculos_auto_vistoriados", label: "Automóveis vistoriados não removidos" },
+          { id: "veiculos_moto_vistoriados", label: "Motocicletas vistoriadas não removidas" },
+          { id: "veiculos_auto_removidos", label: "Automóveis removidos administrativamente" },
+          { id: "veiculos_moto_removidos", label: "Motocicletas removidas administrativamente" },
+          { id: "veiculos_auto_ilicito", label: "Automóveis produto de ilícito" },
+          { id: "veiculos_moto_ilicito", label: "Motocicletas produto de ilícito" }
         ]
       }
     ];
@@ -628,12 +598,12 @@
     function formatValor(campoId, valor){
       const meta = CAMPOS_MAP[campoId];
       if(meta && meta.step === "0.01"){
-        return valor.toFixed(2);
+        return Number(valor).toFixed(2);
       }
       return String(Math.round(valor));
     }
 
-    // CONTROLE DE TELAS
+    // Tabs
     function mostrarSection(id){
       document.querySelectorAll(".section").forEach(sec=>{
         sec.classList.toggle("active", sec.id === id);
@@ -644,19 +614,16 @@
     }
 
     document.querySelectorAll(".tab-btn").forEach(btn=>{
-      btn.addEventListener("click", ()=>{
-        const target = btn.dataset.target;
-        if(target) mostrarSection(target);
-      });
+      btn.addEventListener("click", ()=>mostrarSection(btn.dataset.target));
     });
 
-    // CAMPOS NUMÉRICOS COM NUMERAÇÃO
+    // Montar campos numericos
     function montarCamposNumericos(){
       const container = document.getElementById("camposNumericos");
       container.innerHTML = "";
       let contador = 1;
 
-      GRUPOS.forEach((grupo)=>{
+      GRUPOS.forEach(grupo=>{
         const titulo = document.createElement("div");
         titulo.className = "grupo-titulo";
         titulo.textContent = grupo.titulo;
@@ -666,13 +633,14 @@
         for(let i=0;i<grupo.campos.length;i+=chunkSize){
           const row = document.createElement("div");
           row.className = "form-row";
+
           grupo.campos.slice(i,i+chunkSize).forEach(c=>{
             const f = document.createElement("div");
             f.className = "field";
 
             const lbl = document.createElement("label");
             const numStr = String(contador).padStart(2,"0");
-            lbl.textContent = numStr + " - " + c.label;
+            lbl.textContent = `${numStr} - ${c.label}`;
             lbl.htmlFor = "campo_"+c.id;
 
             const inp = document.createElement("input");
@@ -686,25 +654,23 @@
             f.appendChild(lbl);
             f.appendChild(inp);
             row.appendChild(f);
-
             contador++;
           });
+
           container.appendChild(row);
         }
       });
     }
 
-    // FIREBASE REST
+    // Firebase helpers
     async function firebaseSalvarLancamento(lancamento){
       const url = DB_URL + "/operacoes.json";
       const resp = await fetch(url, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: {"Content-Type":"application/json"},
         body: JSON.stringify(lancamento)
       });
-      if(!resp.ok){
-        throw new Error("Erro ao salvar no Firebase: " + resp.status);
-      }
+      if(!resp.ok) throw new Error("Erro ao salvar: "+resp.status);
       return resp.json();
     }
 
@@ -712,103 +678,88 @@
       const url = DB_URL + "/operacoes/" + encodeURIComponent(key) + ".json";
       const resp = await fetch(url, {
         method: "PUT",
-        headers: { "Content-Type": "application/json" },
+        headers: {"Content-Type":"application/json"},
         body: JSON.stringify(lancamento)
       });
-      if(!resp.ok){
-        throw new Error("Erro ao atualizar no Firebase: " + resp.status);
-      }
+      if(!resp.ok) throw new Error("Erro ao atualizar: "+resp.status);
       return resp.json();
     }
 
     async function firebaseCarregarLancamentos(){
       const url = DB_URL + "/operacoes.json";
       const resp = await fetch(url);
-      if(!resp.ok){
-        throw new Error("Erro ao carregar dados do Firebase: " + resp.status);
-      }
+      if(!resp.ok) throw new Error("Erro ao carregar: "+resp.status);
       const data = await resp.json();
       if(!data) return [];
       const lista = [];
-      for(const key in data){
-        if(Object.prototype.hasOwnProperty.call(data,key)){
-          lista.push({ firebaseKey: key, ...data[key] });
+      for(const k in data){
+        if(Object.prototype.hasOwnProperty.call(data,k)){
+          lista.push({ firebaseKey:k, ...data[k] });
         }
       }
       return lista;
     }
 
     const formLancamento = document.getElementById("formLancamento");
-    const alertForm = document.getElementById("alertForm");
-    const btnLimpar = document.getElementById("btnLimpar");
-    const editBanner = document.getElementById("editBanner");
-    const tituloForm = document.getElementById("tituloForm");
-    const descForm = document.getElementById("descForm");
-    const btnSalvar = document.getElementById("btnSalvar");
+    const alertForm   = document.getElementById("alertForm");
+    const btnLimpar   = document.getElementById("btnLimpar");
+    const editBanner  = document.getElementById("editBanner");
+    const tituloForm  = document.getElementById("tituloForm");
+    const descForm    = document.getElementById("descForm");
+    const btnSalvar   = document.getElementById("btnSalvar");
 
     function mostrarAlertaForm(msg, ok=true){
       alertForm.textContent = msg;
       alertForm.classList.remove("ok","error");
       alertForm.classList.add(ok ? "ok" : "error");
       alertForm.style.display = "block";
-      setTimeout(()=>{ alertForm.style.display = "none"; }, 4500);
+      setTimeout(()=>alertForm.style.display="none", 4500);
     }
 
     function ajustarDatasPadrao(){
-      const hoje = new Date();
-      const iso = hoje.toISOString().slice(0,10);
-      const dataOp = document.getElementById("dataOperacao");
-      const dataRes = document.getElementById("dataResumo");
-      if(dataOp && !dataOp.value) dataOp.value = iso;
-      if(dataRes && !dataRes.value) dataRes.value = iso;
-    }
-
-    function preencherFormulario(lancamento){
-      document.getElementById("dataOperacao").value = lancamento.dataOperacao || "";
-      document.getElementById("cidade").value = lancamento.cidade || "";
-      document.getElementById("viatura").value = lancamento.viatura || "";
-      document.getElementById("re").value = lancamento.re || "";
-
-      const todos = getTodosCampos();
-      todos.forEach(c=>{
-        const inp = document.getElementById("campo_"+c.id);
-        if(!inp) return;
-        const val = lancamento.campos && lancamento.campos[c.id] != null ? lancamento.campos[c.id] : 0;
-        if(CAMPOS_MAP[c.id] && CAMPOS_MAP[c.id].step === "0.01"){
-          inp.value = Number(val).toFixed(2);
-        }else{
-          inp.value = Number(val);
-        }
-      });
+      const hoje = new Date().toISOString().slice(0,10);
+      const d1 = document.getElementById("dataOperacao");
+      const d2 = document.getElementById("dataResumo");
+      if(d1 && !d1.value) d1.value = hoje;
+      if(d2 && !d2.value) d2.value = hoje;
     }
 
     function limparFormulario(){
       formLancamento.reset();
       ajustarDatasPadrao();
-      const todos = getTodosCampos();
-      todos.forEach(c=>{
+      getTodosCampos().forEach(c=>{
         const inp = document.getElementById("campo_"+c.id);
         if(inp) inp.value = "";
       });
     }
 
-    function entrarModoEdicao(lancamento){
-      editingKey = lancamento.firebaseKey;
-      editingLancamento = lancamento;
+    function preencherFormulario(l){
+      document.getElementById("dataOperacao").value = l.dataOperacao || l.data || "";
+      document.getElementById("cidade").value       = l.cidade || "";
+      document.getElementById("viatura").value      = l.viatura || "";
+      document.getElementById("re").value           = l.re || "";
+      getTodosCampos().forEach(c=>{
+        const inp = document.getElementById("campo_"+c.id);
+        if(!inp) return;
+        const val = l.campos && l.campos[c.id] != null ? l.campos[c.id] : 0;
+        inp.value = val;
+      });
+    }
 
-      preencherFormulario(lancamento);
+    function entrarModoEdicao(l){
+      editingKey = l.firebaseKey;
+      editingLancamento = l;
+      preencherFormulario(l);
       mostrarSection("form");
-      window.scrollTo({ top: 0, behavior: "smooth" });
+      window.scrollTo({top:0,behavior:"smooth"});
 
       editBanner.textContent =
-        "Editando lançamento da viatura " + (lancamento.viatura || "") +
-        " - " + (lancamento.cidade || "") +
-        " (" + (lancamento.dataOperacao || "") + "). Após ajustar os campos, clique em 'Salvar lançamento' para atualizar.";
+        `Editando lançamento da viatura ${l.viatura || ""} - ${l.cidade || ""} (${l.dataOperacao || l.data || ""}).`;
       editBanner.style.display = "block";
 
       tituloForm.textContent = "Edição de Lançamento";
-      descForm.textContent = "Você está editando um lançamento existente. Ajuste os valores necessários e clique em 'Salvar lançamento' para atualizar no sistema.";
-      btnSalvar.textContent = "Atualizar lançamento";
+      descForm.textContent   = "Ajuste os valores e clique em 'Salvar lançamento' para atualizar.";
+      btnSalvar.textContent  = "Atualizar lançamento";
     }
 
     function sairModoEdicao(){
@@ -816,43 +767,37 @@
       editingLancamento = null;
       editBanner.style.display = "none";
       tituloForm.textContent = "Lançamento de Resultados";
-      descForm.textContent = "Preencha os dados da operação e lance os resultados da viatura. Todos os campos numéricos aceitam zero. Os dados ficarão disponíveis no resumo por município e total da 2ª Cia.";
-      btnSalvar.textContent = "Salvar lançamento";
+      descForm.textContent   = "Preencha os dados da operação e lance os resultados da viatura.";
+      btnSalvar.textContent  = "Salvar lançamento";
     }
 
-    formLancamento.addEventListener("submit", async (e)=>{
+    formLancamento.addEventListener("submit", async e=>{
       e.preventDefault();
 
       const dataOperacao = document.getElementById("dataOperacao").value;
       const cidade = document.getElementById("cidade").value;
       const viatura = document.getElementById("viatura").value.trim();
-      const re = document.getElementById("re").value.trim();
+      const re      = document.getElementById("re").value.trim();
 
-      if(!dataOperacao){
-        mostrarAlertaForm("Informe a data da operação.", false);
-        return;
-      }
-      if(!cidade || !viatura || !re){
-        mostrarAlertaForm("Preencha cidade, viatura e RE.", false);
+      if(!dataOperacao || !cidade || !viatura || !re){
+        mostrarAlertaForm("Preencha data, cidade, viatura e RE.", false);
         return;
       }
 
-      const camposValores = {};
-      const todos = getTodosCampos();
-      todos.forEach(c=>{
+      const campos = {};
+      getTodosCampos().forEach(c=>{
         const inp = document.getElementById("campo_"+c.id);
-        let vStr = (inp.value || "").toString().replace(",", ".");
-        let valor = vStr === "" ? 0 : parseFloat(vStr);
-        if(isNaN(valor)) valor = 0;
-        camposValores[c.id] = valor;
+        let v = parseFloat((inp.value || "0").toString().replace(",", "."));
+        if(isNaN(v)) v = 0;
+        campos[c.id] = v;
       });
 
-      const lancamento = {
+      const lanc = {
         dataOperacao,
         cidade,
         viatura,
         re,
-        campos: camposValores,
+        campos,
         criadoEm: editingLancamento && editingLancamento.criadoEm
           ? editingLancamento.criadoEm
           : new Date().toISOString()
@@ -860,42 +805,38 @@
 
       try{
         if(editingKey){
-          await firebaseAtualizarLancamento(editingKey, lancamento);
-          mostrarAlertaForm("Lançamento atualizado com sucesso no Firebase!", true);
+          await firebaseAtualizarLancamento(editingKey, lanc);
+          mostrarAlertaForm("Lançamento atualizado com sucesso!", true);
           sairModoEdicao();
         }else{
-          await firebaseSalvarLancamento(lancamento);
-          mostrarAlertaForm("Lançamento salvo com sucesso no Firebase!", true);
+          await firebaseSalvarLancamento(lanc);
+          mostrarAlertaForm("Lançamento salvo com sucesso!", true);
         }
         limparFormulario();
       }catch(err){
         console.error(err);
-        mostrarAlertaForm("Erro ao salvar no Firebase. Verifique conexão ou regras.", false);
+        mostrarAlertaForm("Erro ao salvar no Firebase.", false);
       }
     });
 
     btnLimpar.addEventListener("click", ()=>{
       limparFormulario();
-      if(editingKey){
-        sairModoEdicao();
-      }
+      if(editingKey) sairModoEdicao();
     });
 
-    // VISUALIZAÇÃO / RESUMO
+    // VISUALIZAÇÃO
     const dataResumoInput = document.getElementById("dataResumo");
     const cidadeResumoSelect = document.getElementById("cidadeResumo");
     const btnAtualizarResumo = document.getElementById("btnAtualizarResumo");
     const semDadosResumo = document.getElementById("semDadosResumo");
     const tabelasResumo = document.getElementById("tabelasResumo");
     const resumoCampos = document.getElementById("resumoCampos");
-    const textoRodapeResumo = document.getElementById("textoRodapeResumo");
     const tabelaDetalhes = document.getElementById("tabelaDetalhes");
 
-    function montarResumoIndicadores(mapaValores){
+    function montarResumoIndicadores(mapa){
       resumoCampos.innerHTML = "";
       let contador = 1;
-
-      GRUPOS.forEach((grupo)=>{
+      GRUPOS.forEach(grupo=>{
         const titulo = document.createElement("div");
         titulo.className = "grupo-titulo";
         titulo.textContent = grupo.titulo;
@@ -905,29 +846,30 @@
         for(let i=0;i<grupo.campos.length;i+=chunkSize){
           const row = document.createElement("div");
           row.className = "form-row";
+
           grupo.campos.slice(i,i+chunkSize).forEach(c=>{
             const f = document.createElement("div");
             f.className = "field";
 
             const lbl = document.createElement("label");
             const numStr = String(contador).padStart(2,"0");
-            lbl.textContent = numStr + " - " + c.label;
+            lbl.textContent = `${numStr} - ${c.label}`;
             lbl.htmlFor = "resumo_"+c.id;
 
             const inp = document.createElement("input");
             inp.type = "text";
             inp.readOnly = true;
-            inp.classList.add("readonly-value");
-            const val = mapaValores[c.id] != null ? mapaValores[c.id] : 0;
-            inp.value = formatValor(c.id, val);
+            inp.className = "readonly-value";
             inp.id = "resumo_"+c.id;
+            const val = mapa[c.id] != null ? mapa[c.id] : 0;
+            inp.value = formatValor(c.id, val);
 
             f.appendChild(lbl);
             f.appendChild(inp);
             row.appendChild(f);
-
             contador++;
           });
+
           resumoCampos.appendChild(row);
         }
       });
@@ -946,11 +888,11 @@
 
       let lancamentos;
       try{
-        const todosLanc = await firebaseCarregarLancamentos();
-        lancamentos = todosLanc.filter(l => l.dataOperacao === data);
+        const todos = await firebaseCarregarLancamentos();
+        lancamentos = todos.filter(l => l.dataOperacao === data);
       }catch(err){
         console.error(err);
-        semDadosResumo.textContent = "Erro ao carregar dados do Firebase. Verifique conexão ou regras.";
+        semDadosResumo.textContent = "Erro ao carregar dados do Firebase.";
         semDadosResumo.style.display = "block";
         tabelasResumo.style.display = "none";
         return;
@@ -961,7 +903,7 @@
       }
 
       if(lancamentos.length === 0){
-        semDadosResumo.textContent = "Nenhum lançamento encontrado para o filtro selecionado.";
+        semDadosResumo.textContent = "Nenhum lançamento encontrado para o filtro.";
         semDadosResumo.style.display = "block";
         tabelasResumo.style.display = "none";
         return;
@@ -970,84 +912,67 @@
       semDadosResumo.style.display = "none";
       tabelasResumo.style.display = "block";
 
-      const todos = getTodosCampos();
-      const totalMapa = {};
-      todos.forEach(c => { totalMapa[c.id] = 0; });
-
-      lancamentos.forEach(l=>{
-        todos.forEach(c=>{
-          const v = parseFloat(l.campos && l.campos[c.id] != null ? l.campos[c.id] : 0) || 0;
-          totalMapa[c.id] += v;
-        });
-      });
-
-      if(cidadeFiltro){
-        textoRodapeResumo.textContent =
-          'Resumo consolidado apenas para o município de ' + cidadeFiltro + ' na data selecionada.';
-      }else{
-        textoRodapeResumo.textContent =
-          'Resumo consolidado de toda a 2ª Companhia na data selecionada.';
-      }
-
-      montarResumoIndicadores(totalMapa);
-
-      // Tabela detalhada com botão EDITAR
-      tabelaDetalhes.innerHTML = "";
-      const theadDet = document.createElement("thead");
-      const headRowDet = document.createElement("tr");
-
-      const headersBase = ["Editar","Data","Município","Viatura","RE"];
-      headersBase.forEach(t=>{
-        const thd = document.createElement("th");
-        thd.textContent = t;
-        headRowDet.appendChild(thd);
-      });
       const todosCampos = getTodosCampos();
-      todosCampos.forEach(c=>{
-        const thd = document.createElement("th");
-        thd.textContent = c.label;
-        headRowDet.appendChild(thd);
-      });
-      theadDet.appendChild(headRowDet);
-      tabelaDetalhes.appendChild(theadDet);
+      const mapa = {};
+      todosCampos.forEach(c=>mapa[c.id]=0);
 
-      const tbodyDet = document.createElement("tbody");
       lancamentos.forEach(l=>{
-        const row = document.createElement("tr");
-
-        // Coluna de ação EDITAR
-        const tdAcao = document.createElement("td");
-        const btnEdit = document.createElement("button");
-        btnEdit.type = "button";
-        btnEdit.className = "btn small";
-        btnEdit.textContent = "Editar";
-        btnEdit.addEventListener("click", ()=>{
-          entrarModoEdicao(l);
+        todosCampos.forEach(c=>{
+          const v = parseFloat(l.campos && l.campos[c.id] != null ? l.campos[c.id] : 0) || 0;
+          mapa[c.id] += v;
         });
-        tdAcao.appendChild(btnEdit);
-        row.appendChild(tdAcao);
+      });
 
-        const colsBase = [
-          l.dataOperacao || "",
-          l.cidade || "",
-          l.viatura || "",
-          l.re || ""
-        ];
+      montarResumoIndicadores(mapa);
+
+      // tabela detalhada
+      tabelaDetalhes.innerHTML = "";
+      const thead = document.createElement("thead");
+      const trh = document.createElement("tr");
+
+      ["Editar","Data","Município","Viatura","RE"].forEach(t=>{
+        const th = document.createElement("th");
+        th.textContent = t;
+        trh.appendChild(th);
+      });
+      todosCampos.forEach(c=>{
+        const th = document.createElement("th");
+        th.textContent = c.label;
+        trh.appendChild(th);
+      });
+      thead.appendChild(trh);
+      tabelaDetalhes.appendChild(thead);
+
+      const tbody = document.createElement("tbody");
+      lancamentos.forEach(l=>{
+        const tr = document.createElement("tr");
+
+        const tdEdit = document.createElement("td");
+        const btnE = document.createElement("button");
+        btnE.type = "button";
+        btnE.className = "btn small";
+        btnE.textContent = "Editar";
+        btnE.addEventListener("click", ()=>entrarModoEdicao(l));
+        tdEdit.appendChild(btnE);
+        tr.appendChild(tdEdit);
+
+        const colsBase = [l.dataOperacao || "", l.cidade || "", l.viatura || "", l.re || ""];
         colsBase.forEach(v=>{
           const td = document.createElement("td");
           td.textContent = v;
-          row.appendChild(td);
+          tr.appendChild(td);
         });
 
         todosCampos.forEach(c=>{
           const td = document.createElement("td");
           const v = parseFloat(l.campos && l.campos[c.id] != null ? l.campos[c.id] : 0) || 0;
           td.textContent = formatValor(c.id, v);
-          row.appendChild(td);
+          tr.appendChild(td);
         });
-        tbodyDet.appendChild(row);
+
+        tbody.appendChild(tr);
       });
-      tabelaDetalhes.appendChild(tbodyDet);
+      tabelaDetalhes.appendChild(tbody);
     }
 
     btnAtualizarResumo.addEventListener("click", atualizarResumo);
@@ -1057,7 +982,7 @@
     document.addEventListener("DOMContentLoaded", ()=>{
       montarCamposNumericos();
       ajustarDatasPadrao();
-      mostrarSection("form"); // já abre na tela de lançamento
+      mostrarSection("form");
     });
   </script>
 </body>
