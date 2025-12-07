@@ -98,7 +98,7 @@
     }
 
     .tab-btn{
-      flex:1 1 140px;
+      flex:1 1 160px;
       border-radius:999px;
       border:1px solid rgba(255,255,255,0.18);
       background:radial-gradient(circle at top, rgba(255,255,255,0.06), rgba(0,0,0,0.88));
@@ -112,6 +112,7 @@
       align-items:center;
       gap:6px;
       transition:all .18s ease-out;
+      font-size:0.9rem;
     }
 
     .tab-btn.active{
@@ -145,37 +146,6 @@
       font-size:0.85rem;
       color:var(--cinza);
       margin-bottom:14px;
-    }
-
-    .grid-home{
-      display:grid;
-      grid-template-columns:repeat(auto-fit, minmax(220px,1fr));
-      gap:16px;
-      margin-top:8px;
-    }
-
-    .home-btn{
-      border-radius:18px;
-      border:1px solid #000;
-      background:linear-gradient(135deg,var(--amarelo-neon),#ffd94a);
-      padding:18px 16px;
-      cursor:pointer;
-      color:#000;
-      box-shadow:0 0 16px rgba(255,255,0,0.6);
-      display:flex;
-      flex-direction:column;
-      gap:4px;
-    }
-
-    .home-btn strong{
-      font-size:0.98rem;
-      text-transform:uppercase;
-      letter-spacing:0.14em;
-    }
-
-    .home-btn small{
-      font-size:0.8rem;
-      color:#333;
     }
 
     .form-row{
@@ -254,7 +224,7 @@
       display:inline-flex;
       align-items:center;
       gap:6px;
-      font-size:0.82rem;
+      font-size:0.78rem;
     }
 
     .btn.primary{
@@ -269,6 +239,12 @@
       border-color:#990000;
     }
 
+    .btn.small{
+      padding:4px 10px;
+      font-size:0.7rem;
+      letter-spacing:0.08em;
+    }
+
     .btn:disabled{
       opacity:0.5;
       cursor:not-allowed;
@@ -276,9 +252,9 @@
     }
 
     .alert{
-      margin-top:10px;
-      font-size:0.82rem;
-      padding:8px 10px;
+      margin-top:8px;
+      font-size:0.8rem;
+      padding:6px 10px;
       border-radius:10px;
       border:1px solid rgba(255,255,255,0.18);
       background:rgba(0,0,0,0.7);
@@ -331,48 +307,73 @@
     @media(max-width:720px){
 
       .shell{
-        padding:16px 10px 20px;
+        padding:14px 8px 18px;
         border-radius:16px;
       }
 
       header{
         flex-direction:column;
         align-items:flex-start;
+        gap:4px;
+        margin-bottom:12px;
+        padding-bottom:8px;
       }
 
       .titulo{ font-size:1.1rem; }
 
-      .tabs-top{ flex-direction:column; }
+      .tabs-top{
+        flex-direction:column;
+        gap:6px;
+        margin-bottom:10px;
+      }
+
+      .tab-btn{
+        padding:8px 10px;
+        font-size:0.8rem;
+      }
+
+      .card{
+        padding:12px 10px;
+      }
+
+      .card p.desc{
+        font-size:0.78rem;
+        margin-bottom:10px;
+      }
 
       .form-row{
         flex-direction:column;
-        gap:6px !important;
-        margin-bottom:6px !important;
+        gap:4px !important;
+        margin-bottom:4px !important;
       }
 
       .field{
         min-width:100%;
-        margin-bottom:4px !important;
+        margin-bottom:2px !important;
+        gap:2px;
       }
 
       .field input,
       .field select{
         padding:6px 10px !important;
+        font-size:0.82rem;
       }
 
       .field label{
-        font-size:0.70rem !important;
-        letter-spacing:0.09em !important;
-        margin-bottom:1px !important;
+        font-size:0.68rem !important;
+        letter-spacing:0.08em !important;
+        margin-bottom:0 !important;
       }
 
       .readonly-value{
-        font-size:0.82rem !important;
+        font-size:0.78rem !important;
       }
 
       .grupo-titulo{
-        margin-top:10px !important;
-        margin-bottom:4px !important;
+        margin-top:8px !important;
+        margin-bottom:3px !important;
+        padding-top:4px;
+        font-size:0.78rem;
       }
 
       .btn{
@@ -380,12 +381,9 @@
         justify-content:center;
       }
 
-      .home-btn{
-        width:100%;
-      }
-
       th,td{
-        font-size:0.74rem;
+        font-size:0.7rem;
+        padding:4px 3px;
       }
     }
   </style>
@@ -401,11 +399,9 @@
         <div class="badge">Uso interno • Lançamento &amp; Resumo</div>
       </header>
 
+      <!-- APENAS 2 BOTÕES SUPERIORES -->
       <div class="tabs-top">
-        <button class="tab-btn active" data-target="home">
-          <span class="icon">🏠</span><span>Início</span>
-        </button>
-        <button class="tab-btn" data-target="form">
+        <button class="tab-btn active" data-target="form">
           <span class="icon">✏️</span><span>Lançar Resultado</span>
         </button>
         <button class="tab-btn" data-target="view">
@@ -413,36 +409,17 @@
         </button>
       </div>
 
-      <!-- TELA INICIAL -->
-      <section id="home" class="section active">
-        <div class="card">
-          <h2>Painel Inicial</h2>
-          <p class="desc">
-            Escolha abaixo se deseja <strong>lançar</strong> os resultados
-            da operação ou apenas <strong>visualizar</strong> o resumo consolidado.
-          </p>
-          <div class="grid-home">
-            <button class="home-btn" data-go="form">
-              <strong>Lançar Resultado</strong>
-              <small>Campo de preenchimento para as viaturas (data, cidade, viatura, RE e indicadores).</small>
-            </button>
-            <button class="home-btn" data-go="view">
-              <strong>Visualizar Resultados</strong>
-              <small>Resumo por município ou toda a 2ª Companhia, filtrando por dia.</small>
-            </button>
-          </div>
-        </div>
-      </section>
-
       <!-- TELA DE LANÇAMENTO -->
-      <section id="form" class="section">
+      <section id="form" class="section active">
         <div class="card">
-          <h2>Lançamento de Resultados</h2>
-          <p class="desc">
+          <h2 id="tituloForm">Lançamento de Resultados</h2>
+          <p class="desc" id="descForm">
             Preencha os dados da operação e lance os resultados da viatura.
             Todos os campos numéricos aceitam zero. Os dados ficarão disponíveis
             no resumo por município e total da 2ª Cia.
           </p>
+
+          <div id="editBanner" class="alert ok"></div>
 
           <form id="formLancamento">
             <div class="form-row">
@@ -481,9 +458,9 @@
 
             <div class="form-actions">
               <button type="button" class="btn danger" id="btnLimpar">
-                Limpar campos
+                Limpar campos / Sair da edição
               </button>
-              <button type="submit" class="btn primary">
+              <button type="submit" class="btn primary" id="btnSalvar">
                 Salvar lançamento
               </button>
             </div>
@@ -499,7 +476,7 @@
           <h2>Visualização de Resultados</h2>
           <p class="desc">
             Selecione a data e, opcionalmente, um município específico ou toda a 2ª Companhia.
-            Os indicadores aparecem no mesmo formato de lançamento (título + caixa com valor).
+            Abaixo, você pode visualizar o resumo e editar lançamentos de viaturas.
           </p>
 
           <div class="filters">
@@ -537,7 +514,10 @@
               Resumo consolidado da data selecionada.
             </p>
 
-            <h3 style="font-size:0.9rem;margin-top:18px;">Lançamentos detalhados (por viatura)</h3>
+            <h3 style="font-size:0.9rem;margin-top:12px;">Lançamentos detalhados (por viatura)</h3>
+            <p class="muted" style="margin-top:2px;">
+              Clique em <strong>Editar</strong> na linha desejada para ajustar o lançamento da viatura.
+            </p>
             <div style="overflow-x:auto;">
               <table id="tabelaDetalhes"></table>
             </div>
@@ -549,6 +529,10 @@
 
   <script>
     const DB_URL = "https://resultados-1c75f-default-rtdb.firebaseio.com";
+
+    // Controle de modo edição
+    let editingKey = null;
+    let editingLancamento = null;
 
     const GRUPOS = [
       {
@@ -644,6 +628,7 @@
       return String(Math.round(valor));
     }
 
+    // CONTROLE DE TELAS
     function mostrarSection(id){
       document.querySelectorAll(".section").forEach(sec=>{
         sec.classList.toggle("active", sec.id === id);
@@ -660,13 +645,7 @@
       });
     });
 
-    document.querySelectorAll(".home-btn").forEach(btn=>{
-      btn.addEventListener("click", ()=>{
-        const target = btn.dataset.go;
-        if(target) mostrarSection(target);
-      });
-    });
-
+    // CAMPOS NUMÉRICOS COM NUMERAÇÃO
     function montarCamposNumericos(){
       const container = document.getElementById("camposNumericos");
       container.innerHTML = "";
@@ -710,6 +689,7 @@
       });
     }
 
+    // FIREBASE REST
     async function firebaseSalvarLancamento(lancamento){
       const url = DB_URL + "/operacoes.json";
       const resp = await fetch(url, {
@@ -719,6 +699,19 @@
       });
       if(!resp.ok){
         throw new Error("Erro ao salvar no Firebase: " + resp.status);
+      }
+      return resp.json();
+    }
+
+    async function firebaseAtualizarLancamento(key, lancamento){
+      const url = DB_URL + "/operacoes/" + encodeURIComponent(key) + ".json";
+      const resp = await fetch(url, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(lancamento)
+      });
+      if(!resp.ok){
+        throw new Error("Erro ao atualizar no Firebase: " + resp.status);
       }
       return resp.json();
     }
@@ -743,6 +736,10 @@
     const formLancamento = document.getElementById("formLancamento");
     const alertForm = document.getElementById("alertForm");
     const btnLimpar = document.getElementById("btnLimpar");
+    const editBanner = document.getElementById("editBanner");
+    const tituloForm = document.getElementById("tituloForm");
+    const descForm = document.getElementById("descForm");
+    const btnSalvar = document.getElementById("btnSalvar");
 
     function mostrarAlertaForm(msg, ok=true){
       alertForm.textContent = msg;
@@ -759,6 +756,63 @@
       const dataRes = document.getElementById("dataResumo");
       if(dataOp && !dataOp.value) dataOp.value = iso;
       if(dataRes && !dataRes.value) dataRes.value = iso;
+    }
+
+    function preencherFormulario(lancamento){
+      document.getElementById("dataOperacao").value = lancamento.dataOperacao || "";
+      document.getElementById("cidade").value = lancamento.cidade || "";
+      document.getElementById("viatura").value = lancamento.viatura || "";
+      document.getElementById("re").value = lancamento.re || "";
+
+      const todos = getTodosCampos();
+      todos.forEach(c=>{
+        const inp = document.getElementById("campo_"+c.id);
+        if(!inp) return;
+        const val = lancamento.campos && lancamento.campos[c.id] != null ? lancamento.campos[c.id] : 0;
+        if(CAMPOS_MAP[c.id] && CAMPOS_MAP[c.id].step === "0.01"){
+          inp.value = Number(val).toFixed(2);
+        }else{
+          inp.value = Number(val);
+        }
+      });
+    }
+
+    function limparFormulario(){
+      formLancamento.reset();
+      ajustarDatasPadrao();
+      const todos = getTodosCampos();
+      todos.forEach(c=>{
+        const inp = document.getElementById("campo_"+c.id);
+        if(inp) inp.value = "";
+      });
+    }
+
+    function entrarModoEdicao(lancamento){
+      editingKey = lancamento.firebaseKey;
+      editingLancamento = lancamento;
+
+      preencherFormulario(lancamento);
+      mostrarSection("form");
+      window.scrollTo({ top: 0, behavior: "smooth" });
+
+      editBanner.textContent =
+        "Editando lançamento da viatura " + (lancamento.viatura || "") +
+        " - " + (lancamento.cidade || "") +
+        " (" + (lancamento.dataOperacao || "") + "). Após ajustar os campos, clique em 'Salvar lançamento' para atualizar.";
+      editBanner.style.display = "block";
+
+      tituloForm.textContent = "Edição de Lançamento";
+      descForm.textContent = "Você está editando um lançamento existente. Ajuste os valores necessários e clique em 'Salvar lançamento' para atualizar no sistema.";
+      btnSalvar.textContent = "Atualizar lançamento";
+    }
+
+    function sairModoEdicao(){
+      editingKey = null;
+      editingLancamento = null;
+      editBanner.style.display = "none";
+      tituloForm.textContent = "Lançamento de Resultados";
+      descForm.textContent = "Preencha os dados da operação e lance os resultados da viatura. Todos os campos numéricos aceitam zero. Os dados ficarão disponíveis no resumo por município e total da 2ª Cia.";
+      btnSalvar.textContent = "Salvar lançamento";
     }
 
     formLancamento.addEventListener("submit", async (e)=>{
@@ -794,14 +848,21 @@
         viatura,
         re,
         campos: camposValores,
-        criadoEm: new Date().toISOString()
+        criadoEm: editingLancamento && editingLancamento.criadoEm
+          ? editingLancamento.criadoEm
+          : new Date().toISOString()
       };
 
       try{
-        await firebaseSalvarLancamento(lancamento);
-        mostrarAlertaForm("Lançamento salvo com sucesso no Firebase!", true);
-        formLancamento.reset();
-        ajustarDatasPadrao();
+        if(editingKey){
+          await firebaseAtualizarLancamento(editingKey, lancamento);
+          mostrarAlertaForm("Lançamento atualizado com sucesso no Firebase!", true);
+          sairModoEdicao();
+        }else{
+          await firebaseSalvarLancamento(lancamento);
+          mostrarAlertaForm("Lançamento salvo com sucesso no Firebase!", true);
+        }
+        limparFormulario();
       }catch(err){
         console.error(err);
         mostrarAlertaForm("Erro ao salvar no Firebase. Verifique conexão ou regras.", false);
@@ -809,10 +870,13 @@
     });
 
     btnLimpar.addEventListener("click", ()=>{
-      formLancamento.reset();
-      ajustarDatasPadrao();
+      limparFormulario();
+      if(editingKey){
+        sairModoEdicao();
+      }
     });
 
+    // VISUALIZAÇÃO / RESUMO
     const dataResumoInput = document.getElementById("dataResumo");
     const cidadeResumoSelect = document.getElementById("cidadeResumo");
     const btnAtualizarResumo = document.getElementById("btnAtualizarResumo");
@@ -913,22 +977,28 @@
       });
 
       if(cidadeFiltro){
-        textoRodapeResumo.textContent = 'Resumo consolidado apenas para o município de ' + cidadeFiltro + ' na data selecionada.';
+        textoRodapeResumo.textContent =
+          'Resumo consolidado apenas para o município de ' + cidadeFiltro + ' na data selecionada.';
       }else{
-        textoRodapeResumo.textContent = 'Resumo consolidado de toda a 2ª Companhia na data selecionada.';
+        textoRodapeResumo.textContent =
+          'Resumo consolidado de toda a 2ª Companhia na data selecionada.';
       }
 
       montarResumoIndicadores(totalMapa);
 
+      // Tabela detalhada com botão EDITAR
       tabelaDetalhes.innerHTML = "";
       const theadDet = document.createElement("thead");
       const headRowDet = document.createElement("tr");
-      ["Data","Município","Viatura","RE"].forEach(t=>{
+
+      const headersBase = ["Editar","Data","Município","Viatura","RE"];
+      headersBase.forEach(t=>{
         const thd = document.createElement("th");
         thd.textContent = t;
         headRowDet.appendChild(thd);
       });
-      todos.forEach(c=>{
+      const todosCampos = getTodosCampos();
+      todosCampos.forEach(c=>{
         const thd = document.createElement("th");
         thd.textContent = c.label;
         headRowDet.appendChild(thd);
@@ -939,6 +1009,19 @@
       const tbodyDet = document.createElement("tbody");
       lancamentos.forEach(l=>{
         const row = document.createElement("tr");
+
+        // Coluna de ação EDITAR
+        const tdAcao = document.createElement("td");
+        const btnEdit = document.createElement("button");
+        btnEdit.type = "button";
+        btnEdit.className = "btn small";
+        btnEdit.textContent = "Editar";
+        btnEdit.addEventListener("click", ()=>{
+          entrarModoEdicao(l);
+        });
+        tdAcao.appendChild(btnEdit);
+        row.appendChild(tdAcao);
+
         const colsBase = [
           l.dataOperacao || "",
           l.cidade || "",
@@ -950,7 +1033,8 @@
           td.textContent = v;
           row.appendChild(td);
         });
-        todos.forEach(c=>{
+
+        todosCampos.forEach(c=>{
           const td = document.createElement("td");
           const v = parseFloat(l.campos && l.campos[c.id] != null ? l.campos[c.id] : 0) || 0;
           td.textContent = formatValor(c.id, v);
@@ -968,6 +1052,7 @@
     document.addEventListener("DOMContentLoaded", ()=>{
       montarCamposNumericos();
       ajustarDatasPadrao();
+      mostrarSection("form"); // já abre na tela de lançamento
     });
   </script>
 </body>
