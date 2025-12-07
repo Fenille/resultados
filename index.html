@@ -291,7 +291,7 @@
       margin-top:6px;
     }
 
-    /* ===================== MOBILE – ESPAÇAMENTO MÍNIMO ===================== */
+    /* ===================== MOBILE – ESPAÇAMENTO QUASE ZERO ===================== */
     @media (max-width:720px){
 
       body{
@@ -349,7 +349,7 @@
         margin:0 0 3px 0 !important;
       }
 
-      /* ---------- FORMULÁRIO E RESUMO: LINHAS E CAMPOS SEM ESPAÇO ---------- */
+      /* ---------- GERAL: campos em coluna compacta ---------- */
       .form-row{
         flex-direction:column !important;
         gap:0 !important;
@@ -425,34 +425,40 @@
         font-size:0.7rem !important;
       }
 
-      /* ---------- RESUMO DOS INDICADORES – REFORÇO ---------- */
+      /* 🔥 PONTO CRÍTICO: INSERIR E RESUMO SEM "CAIXA FANTASMA" ---------- */
+
+      /* some com os .form-row dentro dos blocos numéricos */
+      #camposNumericos .form-row,
       #resumoCampos .form-row{
-        flex-direction:column !important;
-        gap:0 !important;
-        margin:0 !important;
-        padding:0 !important;
-      }
-
-      #resumoCampos .field{
-        min-width:100% !important;
+        display:contents !important;
         margin:0 !important;
         padding:0 !important;
         gap:0 !important;
       }
 
-      #resumoCampos .field label{
+      #resumoCampos .field,
+      #camposNumericos .field{
+        margin:0 !important;
+        padding:0 !important;
+        gap:0 !important;
+      }
+
+      #resumoCampos .field label,
+      #camposNumericos .field label{
         margin:0 0 1px 0 !important;
         font-size:0.62rem !important;
       }
 
-      #resumoCampos .field input{
+      #resumoCampos .field input,
+      #camposNumericos .field input{
         margin:0 !important;
         padding:2px 8px !important;
         height:22px !important;
         font-size:0.75rem !important;
       }
 
-      #resumoCampos .grupo-titulo{
+      #resumoCampos .grupo-titulo,
+      #camposNumericos .grupo-titulo{
         margin:4px 0 1px 0 !important;
         padding:0 !important;
       }
