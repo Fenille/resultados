@@ -303,89 +303,94 @@
       margin-top:6px;
     }
 
-    /* MOBILE OTIMIZADO */
-    @media(max-width:720px){
+    /* MOBILE BEM COMPACTO */
+@media(max-width:720px){
 
-      .shell{
-        padding:14px 8px 18px;
-        border-radius:16px;
-      }
+  .shell{
+    padding:12px 8px 16px;
+    border-radius:16px;
+  }
 
-      header{
-        flex-direction:column;
-        align-items:flex-start;
-        gap:4px;
-        margin-bottom:12px;
-        padding-bottom:8px;
-      }
+  header{
+    flex-direction:column;
+    align-items:flex-start;
+    gap:4px;
+    margin-bottom:10px;
+    padding-bottom:6px;
+  }
 
-      .titulo{ font-size:1.1rem; }
+  .titulo{ font-size:1.05rem; }
 
-      .tabs-top{
-        flex-direction:column;
-        gap:6px;
-        margin-bottom:10px;
-      }
+  .tabs-top{
+    flex-direction:column;
+    gap:4px;
+    margin-bottom:8px;
+  }
 
-      .tab-btn{
-        padding:8px 10px;
-        font-size:0.8rem;
-      }
+  .tab-btn{
+    padding:7px 10px;
+    font-size:0.78rem;
+  }
 
-      .card{
-        padding:12px 10px;
-      }
+  .card{
+    padding:10px 8px;
+  }
 
-      .card p.desc{
-        font-size:0.78rem;
-        margin-bottom:10px;
-      }
+  .card p.desc{
+    font-size:0.76rem;
+    margin-bottom:8px;
+  }
 
-      .form-row{
-        flex-direction:column;
-        gap:4px !important;
-        margin-bottom:4px !important;
-      }
+  /* >>> AQUI É ONDE APERTA OS CAMPOS <<< */
+  .form-row{
+    flex-direction:column;
+    gap:2px !important;
+    margin-bottom:2px !important;
+  }
 
-      .field{
-        min-width:100%;
-        margin-bottom:2px !important;
-        gap:2px;
-      }
+  .field{
+    min-width:100%;
+    margin-bottom:0 !important;
+    gap:1px;
+  }
 
-      .field input,
-      .field select{
-        padding:6px 10px !important;
-        font-size:0.82rem;
-      }
+  .field label{
+    font-size:0.64rem !important;
+    letter-spacing:0.06em !important;
+    margin-bottom:0 !important;
+  }
 
-      .field label{
-        font-size:0.68rem !important;
-        letter-spacing:0.08em !important;
-        margin-bottom:0 !important;
-      }
+  .field input,
+  .field select{
+    padding:4px 8px !important;
+    font-size:0.78rem;
+    line-height:1.1;
+  }
 
-      .readonly-value{
-        font-size:0.78rem !important;
-      }
+  .readonly-value{
+    font-size:0.76rem !important;
+  }
 
-      .grupo-titulo{
-        margin-top:8px !important;
-        margin-bottom:3px !important;
-        padding-top:4px;
-        font-size:0.78rem;
-      }
+  .grupo-titulo{
+    margin-top:6px !important;
+    margin-bottom:2px !important;
+    padding-top:2px;
+    font-size:0.76rem;
+  }
 
-      .btn{
-        width:100%;
-        justify-content:center;
-      }
+  .btn{
+    width:100%;
+    justify-content:center;
+    padding:7px 10px;
+    font-size:0.76rem;
+  }
 
-      th,td{
-        font-size:0.7rem;
-        padding:4px 3px;
-      }
-    }
+  th,td{
+    font-size:0.7rem;
+    padding:4px 3px;
+  }
+}
+
   </style>
 </head>
 <body>
