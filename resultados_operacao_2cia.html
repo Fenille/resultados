@@ -1,0 +1,993 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Resultados de Operação - 2ª Cia</title>
+  <style>
+    :root{
+      --amarelo:#FFFF00;
+      --amarelo-neon:#f9ff7a;
+      --cinza:#ccc;
+      --cinza-medio:#777;
+      --bg:#000;
+      --card-bg:rgba(10,10,15,0.96);
+      --gap:20px;
+      --radius:14px;
+      --shadow-soft:0 14px 40px rgba(0,0,0,0.8);
+    }
+    *{box-sizing:border-box;margin:0;padding:0;}
+    body{
+      min-height:100vh;
+      background:
+        radial-gradient(circle at top, #202020 0, #050509 48%, #000 100%);
+      font-family:Arial,Helvetica,sans-serif;
+      color:var(--amarelo);
+      display:flex;
+      justify-content:center;
+      align-items:flex-start;
+      padding:24px 10px 40px;
+    }
+    .shell{
+      width:100%;
+      max-width:1200px;
+      background:radial-gradient(circle at top, #1c1c1c 0, #050509 55%, #000 100%);
+      border-radius:22px;
+      border:1px solid #444;
+      padding:22px 18px 28px;
+      box-shadow:0 0 28px rgba(0,0,0,0.95);
+      position:relative;
+      overflow:hidden;
+    }
+    .shell::before{
+      content:"";
+      position:absolute;
+      inset:-80px;
+      background:
+        radial-gradient(circle at 0 0, rgba(255,255,0,0.16), transparent 55%),
+        radial-gradient(circle at 100% 0, rgba(255,255,0,0.12), transparent 50%);
+      opacity:0.9;
+      pointer-events:none;
+    }
+    .shell-inner{
+      position:relative;
+      z-index:1;
+    }
+
+    header{
+      display:flex;
+      flex-wrap:wrap;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      margin-bottom:18px;
+      padding-bottom:12px;
+      border-bottom:1px solid rgba(255,255,255,0.08);
+    }
+    .titulo{
+      font-size:1.4rem;
+      font-weight:700;
+      letter-spacing:0.04em;
+      text-transform:uppercase;
+      text-shadow:0 0 8px rgba(255,255,0,0.55);
+    }
+    .subtitulo{
+      font-size:0.86rem;
+      color:var(--cinza);
+      text-transform:uppercase;
+      letter-spacing:0.15em;
+    }
+    .badge{
+      font-size:0.75rem;
+      padding:4px 10px;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,0.22);
+      background:linear-gradient(120deg, rgba(255,255,255,0.04), rgba(0,0,0,0.65));
+      text-transform:uppercase;
+      letter-spacing:0.16em;
+      color:var(--cinza);
+    }
+
+    .tabs-top{
+      display:flex;
+      gap:10px;
+      margin-bottom:16px;
+      flex-wrap:wrap;
+    }
+    .tab-btn{
+      flex:1 1 140px;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,0.18);
+      background:radial-gradient(circle at top, rgba(255,255,255,0.06), rgba(0,0,0,0.88));
+      padding:10px 14px;
+      font-size:0.92rem;
+      text-transform:uppercase;
+      letter-spacing:0.16em;
+      cursor:pointer;
+      color:var(--cinza);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      gap:6px;
+      transition:all .18s ease-out;
+    }
+    .tab-btn span.icon{
+      font-size:1rem;
+    }
+    .tab-btn.active{
+      color:#000;
+      background:linear-gradient(135deg, var(--amarelo-neon), #ffe45c);
+      border-color:#000;
+      box-shadow:0 0 22px rgba(255,255,0,0.5);
+      text-shadow:none;
+    }
+    .tab-btn:hover{
+      transform:translateY(-1px);
+      box-shadow:0 8px 18px rgba(0,0,0,0.8);
+    }
+
+    .section{
+      display:none;
+      margin-top:4px;
+    }
+    .section.active{
+      display:block;
+    }
+
+    .card{
+      background:var(--card-bg);
+      border-radius:var(--radius);
+      border:1px solid rgba(255,255,255,0.15);
+      box-shadow:var(--shadow-soft);
+      padding:18px 16px 18px;
+    }
+    .card h2{
+      font-size:1.05rem;
+      margin-bottom:10px;
+      text-transform:uppercase;
+      letter-spacing:0.16em;
+    }
+    .card p.desc{
+      font-size:0.85rem;
+      color:var(--cinza);
+      margin-bottom:14px;
+    }
+
+    .grid-home{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+      gap:16px;
+      margin-top:8px;
+    }
+    .home-btn{
+      border-radius:18px;
+      border:1px solid #000;
+      background:linear-gradient(135deg,var(--amarelo-neon),#ffd94a);
+      padding:18px 16px;
+      cursor:pointer;
+      text-align:left;
+      display:flex;
+      flex-direction:column;
+      gap:4px;
+      transition:all .18s ease-out;
+      color:#000;
+      box-shadow:0 0 16px rgba(255,255,0,0.6);
+    }
+    .home-btn strong{
+      font-size:0.98rem;
+      text-transform:uppercase;
+      letter-spacing:0.14em;
+    }
+    .home-btn small{
+      font-size:0.8rem;
+      color:#333;
+    }
+    .home-btn:hover{
+      transform:translateY(-2px);
+      box-shadow:0 12px 30px rgba(0,0,0,0.9);
+    }
+
+    .form-row{
+      display:flex;
+      flex-wrap:wrap;
+      gap:12px;
+      margin-bottom:10px;
+    }
+    .field{
+      flex:1 1 160px;
+      min-width:150px;
+      display:flex;
+      flex-direction:column;
+      gap:4px;
+      font-size:0.85rem;
+    }
+    .field label{
+      text-transform:uppercase;
+      letter-spacing:0.16em;
+      font-size:0.75rem;
+      color:var(--cinza);
+    }
+    .field input,
+    .field select{
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,0.25);
+      background:rgba(0,0,0,0.75);
+      color:var(--amarelo-neon);
+      padding:8px 13px;
+      font-size:0.9rem;
+      outline:none;
+      text-align:left; /* valores à esquerda */
+    }
+
+    .readonly-value{
+      background:rgba(10,10,10,0.9);
+    }
+
+    .field input:focus,
+    .field select:focus{
+      border-color:var(--amarelo-neon);
+      box-shadow:0 0 0 1px rgba(255,255,0,0.35);
+    }
+
+    .grupo-titulo{
+      margin-top:14px;
+      margin-bottom:4px;
+      padding-top:8px;
+      border-top:1px solid rgba(255,255,255,0.14);
+      font-size:0.86rem;
+      text-transform:uppercase;
+      letter-spacing:0.14em;
+      color:var(--cinza);
+    }
+
+    .form-actions{
+      margin-top:12px;
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      justify-content:flex-end;
+    }
+    .btn{
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,0.3);
+      padding:9px 18px;
+      font-size:0.82rem;
+      text-transform:uppercase;
+      letter-spacing:0.16em;
+      cursor:pointer;
+      background:radial-gradient(circle at top, rgba(255,255,255,0.12), rgba(0,0,0,0.92));
+      color:var(--amarelo-neon);
+      display:inline-flex;
+      align-items:center;
+      gap:6px;
+    }
+    .btn.primary{
+      background:linear-gradient(135deg, var(--amarelo-neon), #ffd94a);
+      color:#000;
+      border-color:#000;
+      box-shadow:0 0 16px rgba(255,255,0,0.55);
+    }
+    .btn.danger{
+      border-color:#d55;
+      color:#f88;
+    }
+    .btn:disabled{
+      opacity:0.5;
+      cursor:not-allowed;
+      box-shadow:none;
+    }
+
+    .alert{
+      margin-top:10px;
+      font-size:0.82rem;
+      padding:8px 10px;
+      border-radius:10px;
+      border:1px solid rgba(255,255,255,0.18);
+      background:rgba(0,0,0,0.7);
+      display:none;
+    }
+    .alert.ok{
+      border-color:#4caf50;
+      color:#bdfcbf;
+    }
+    .alert.error{
+      border-color:#f44336;
+      color:#ffc1c1;
+    }
+
+    .filters{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      margin-bottom:10px;
+      align-items:flex-end;
+    }
+
+    table{
+      width:100%;
+      border-collapse:collapse;
+      margin-top:8px;
+      font-size:0.8rem;
+    }
+    thead{
+      background:rgba(255,255,255,0.06);
+    }
+    th,td{
+      padding:6px 6px;
+      border-bottom:1px solid rgba(255,255,255,0.08);
+      text-align:right;
+      white-space:nowrap;
+    }
+    th:first-child, td:first-child{
+      text-align:left;
+    }
+    .muted{
+      color:var(--cinza-medio);
+      font-size:0.78rem;
+      margin-top:6px;
+    }
+
+    @media(max-width:720px){
+      .shell{
+        padding:16px 10px 20px;
+        border-radius:16px;
+      }
+      header{
+        flex-direction:column;
+        align-items:flex-start;
+      }
+      .titulo{
+        font-size:1.1rem;
+      }
+      .tabs-top{
+        flex-direction:column;
+      }
+      .form-row{
+        flex-direction:column;
+      }
+      .field{
+        min-width:100%;
+      }
+      .btn{
+        width:100%;
+        justify-content:center;
+      }
+      .home-btn{
+        width:100%;
+      }
+      th,td{
+        font-size:0.74rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="shell">
+    <div class="shell-inner">
+      <header>
+        <div>
+          <div class="titulo">Sistema de Resultados Operacionais</div>
+          <div class="subtitulo">2ª Companhia - 18º BPM/I</div>
+        </div>
+        <div class="badge">Uso interno • Lançamento &amp; Resumo</div>
+      </header>
+
+      <!-- Abas superiores -->
+      <div class="tabs-top">
+        <button class="tab-btn active" data-target="home">
+          <span class="icon">🏠</span><span>Início</span>
+        </button>
+        <button class="tab-btn" data-target="form">
+          <span class="icon">✏️</span><span>Lançar Resultados</span>
+        </button>
+        <button class="tab-btn" data-target="view">
+          <span class="icon">📊</span><span>Visualizar Resumo</span>
+        </button>
+      </div>
+
+      <!-- TELA INICIAL -->
+      <section id="home" class="section active">
+        <div class="card">
+          <h2>Painel Inicial</h2>
+          <p class="desc">
+            Escolha abaixo se deseja fazer o <strong>lançamento</strong> dos resultados
+            da operação ou apenas <strong>visualizar</strong> o resumo consolidado.
+          </p>
+          <div class="grid-home">
+            <button class="home-btn" data-go="form">
+              <strong>Inserir Resultados</strong>
+              <small>Campo de preenchimento para as viaturas (data, cidade, viatura, RE e indicadores).</small>
+            </button>
+            <button class="home-btn" data-go="view">
+              <strong>Visualizar Resultados</strong>
+              <small>Resumo por município ou toda a 2ª Companhia, filtrando por dia.</small>
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- TELA DE LANÇAMENTO -->
+      <section id="form" class="section">
+        <div class="card">
+          <h2>Lançamento de Resultados</h2>
+          <p class="desc">
+            Preencha os dados da operação e lance os resultados da viatura.
+            Todos os campos numéricos aceitam zero. Os dados ficarão disponíveis
+            no resumo por município e total da 2ª Cia.
+          </p>
+
+          <form id="formLancamento">
+            <div class="form-row">
+              <div class="field">
+                <label for="dataOperacao">Data da operação</label>
+                <input type="date" id="dataOperacao" name="dataOperacao">
+              </div>
+              <div class="field">
+                <label for="cidade">Cidade</label>
+                <select id="cidade" name="cidade" required>
+                  <option value="">Selecione...</option>
+                  <option>Martinópolis</option>
+                  <option>Rancharia</option>
+                  <option>João Ramalho</option>
+                  <option>Caiabu</option>
+                  <option>Indiana</option>
+                  <option>Taciba</option>
+                  <option>Nantes</option>
+                  <option>Iepê</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="field">
+                <label for="viatura">Viatura</label>
+                <input type="text" id="viatura" name="viatura" placeholder="Ex: M-18210" required>
+              </div>
+              <div class="field">
+                <label for="re">RE</label>
+                <input type="text" id="re" name="re" placeholder="RE do responsável" required>
+              </div>
+            </div>
+
+            <!-- Campos numéricos (gerados via JS com numeração à esquerda) -->
+            <div id="camposNumericos"></div>
+
+            <div class="form-actions">
+              <button type="button" class="btn danger" id="btnLimpar">
+                Limpar campos
+              </button>
+              <button type="submit" class="btn primary">
+                Salvar lançamento
+              </button>
+            </div>
+
+            <div id="alertForm" class="alert"></div>
+          </form>
+        </div>
+      </section>
+
+      <!-- TELA DE VISUALIZAÇÃO -->
+      <section id="view" class="section">
+        <div class="card">
+          <h2>Visualização de Resultados</h2>
+          <p class="desc">
+            Selecione a data e, opcionalmente, um município específico ou toda a 2ª Companhia.
+            Os indicadores aparecem no mesmo formato de lançamento (título + caixa com valor).
+          </p>
+
+          <div class="filters">
+            <div class="field" style="max-width:220px;">
+              <label for="dataResumo">Data</label>
+              <input type="date" id="dataResumo">
+            </div>
+            <div class="field" style="max-width:260px;">
+              <label for="cidadeResumo">Município / Companhia</label>
+              <select id="cidadeResumo">
+                <option value="">Toda 2ª Companhia</option>
+                <option>Martinópolis</option>
+                <option>Rancharia</option>
+                <option>João Ramalho</option>
+                <option>Caiabu</option>
+                <option>Indiana</option>
+                <option>Taciba</option>
+                <option>Nantes</option>
+                <option>Iepê</option>
+              </select>
+            </div>
+            <button class="btn" id="btnAtualizarResumo">
+              Atualizar resumo
+            </button>
+          </div>
+
+          <div id="semDadosResumo" class="muted">
+            Nenhum lançamento encontrado para a data selecionada.
+          </div>
+
+          <div id="tabelasResumo" style="display:none;">
+            <h3 style="font-size:0.9rem;margin-top:6px;">Resumo dos indicadores</h3>
+
+            <!-- Mesmo layout da inserção: grupos + campos com caixas -->
+            <div id="resumoCampos"></div>
+
+            <p class="muted" id="textoRodapeResumo">
+              Resumo consolidado da data selecionada.
+            </p>
+
+            <h3 style="font-size:0.9rem;margin-top:18px;">Lançamentos detalhados (por viatura)</h3>
+            <div style="overflow-x:auto;">
+              <table id="tabelaDetalhes"></table>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
+
+  <script>
+    // ============================
+    // CONFIG FIREBASE (REST)
+    // ============================
+    // URL base do Realtime Database (sem a parte /operacoes.json no final)
+    const DB_URL = "https://resultados-1c75f-default-rtdb.firebaseio.com";
+
+    // ============================
+    // CONFIGURAÇÃO DE CAMPOS
+    // ============================
+    const GRUPOS = [
+      {
+        titulo: "Dados Básicos",
+        campos: [
+          { id: "pessoas_abordadas_exceto_condutores", label: "Pessoas abordadas (exceto condutores)" },
+          { id: "bopm_lavrados", label: "Quantidade de BOPM Lavrados" },
+          { id: "mandados_busca_apreensao_cumpridos", label: "Mandados Busca e Apreensão cumpridos" }
+        ]
+      },
+      {
+        titulo: "Flagrantes / Pessoas",
+        campos: [
+          { id: "ato_infracional", label: "Ato Infracional" },
+          { id: "crime_exceto_trafico", label: "Crime (Exceto Tráfico)" },
+          { id: "trafico_drogas", label: "Tráfico Drogas" },
+          { id: "pessoas_presas", label: "Pessoas Presas" },
+          { id: "adolescentes_sindicados", label: "Adolescentes Sindicados" },
+          { id: "adolescentes_apreendidos", label: "Adolescentes Apreendidos" },
+          { id: "procurados", label: "Procurados" }
+        ]
+      },
+      {
+        titulo: "Drogas (em quilogramas)",
+        campos: [
+          { id: "cocaina_kg", label: "Cocaína (kg)", step: "0.01" },
+          { id: "crack_kg", label: "Crack (kg)", step: "0.01" },
+          { id: "maconha_kg", label: "Maconha (kg)", step: "0.01" },
+          { id: "outra_droga_kg", label: "Outra (kg)", step: "0.01" }
+        ]
+      },
+      {
+        titulo: "Material Bélico",
+        campos: [
+          { id: "arma_branca", label: "Arma Branca" },
+          { id: "arma_fogo_calibre_permitido", label: "Arma de Fogo de calibre permitido" },
+          { id: "municao_calibre_permitido", label: "Munição de calibre permitido" },
+          { id: "municao_calibre_restrito", label: "Munição de calibre restrito" },
+          { id: "revolver_calibre_restrito", label: "Revólver de calibre restrito" },
+          { id: "pistola_calibre_restrito", label: "Pistola de calibre restrito" },
+          { id: "outra_arma_fogo", label: "Outra arma de fogo" }
+        ]
+      },
+      {
+        titulo: "Apreensões Diversas",
+        campos: [
+          { id: "moeda_reais", label: "Moeda em reais (R$)", step: "0.01" },
+          { id: "cigarro_caixas", label: "Cigarro (em caixas)" },
+          { id: "celular", label: "Celular" }
+        ]
+      },
+      {
+        titulo: "Trânsito Urbano",
+        campos: [
+          { id: "acidente_sem_vitima", label: "Acidente de trânsito sem vítima" },
+          { id: "acidente_com_vitima", label: "Acidente de trânsito com vítima" },
+          { id: "vitimas_nao_fatais", label: "Quantitativo de vítimas não fatais de acidentes de trânsito" },
+          { id: "vitimas_fatais", label: "Quantitativo de vítimas fatais de acidentes de trânsito" },
+          { id: "total_condutores_abordados", label: "Total de condutores abordados" },
+          { id: "autos_infracao_exceto_artigos", label: "Autos de infração lavrados - Exceto Artigo (165, 165-A, 228 e 253-A)" },
+          { id: "autos_art_165", label: "Autos de infração - Art. 165 do CTB" },
+          { id: "autos_art_165a", label: "Autos de infração - Art. 165-A do CTB" },
+          { id: "autos_art_228", label: "Autos de infração - Art. 228 do CTB" },
+          { id: "bloqueios_transito", label: "Quantidade de Bloqueios de trânsito realizados" },
+          { id: "pontos_visibilidade", label: "Quantidade de pontos de visibilidade realizados" },
+          { id: "testes_etilometro", label: "Testes de Etilômetro realizados" },
+          { id: "recusa_etilometro", label: "Recusa dos testes de Etilômetro" },
+          { id: "flagrantes_art_306", label: "Flagrantes pelo Art. 306 do CTB" },
+          { id: "veiculos_auto_vistoriados", label: "Veículos vistoriados (Automóveis) não removidos" },
+          { id: "veiculos_moto_vistoriados", label: "Veículos vistoriados (Motocicletas) não removidos" },
+          { id: "veiculos_auto_removidos", label: "Veículos removidos administrativamente (Automóveis)" },
+          { id: "veiculos_moto_removidos", label: "Veículos removidos administrativamente (Motocicletas)" },
+          { id: "veiculos_auto_ilicito", label: "Veículos (Automóveis) produto de ilícito" },
+          { id: "veiculos_moto_ilicito", label: "Veículos (Motocicleta) produto de ilícito" }
+        ]
+      }
+    ];
+
+    const CIDADES = [
+      "Martinópolis",
+      "Rancharia",
+      "João Ramalho",
+      "Caiabu",
+      "Indiana",
+      "Taciba",
+      "Nantes",
+      "Iepê"
+    ];
+
+    const CAMPOS_MAP = {};
+    GRUPOS.forEach(g => g.campos.forEach(c => { CAMPOS_MAP[c.id] = c; }));
+
+    function getTodosCampos(){
+      const arr = [];
+      GRUPOS.forEach(g => g.campos.forEach(c => arr.push(c)));
+      return arr;
+    }
+
+    function formatValor(campoId, valor){
+      const meta = CAMPOS_MAP[campoId];
+      if(meta && meta.step === "0.01"){
+        return valor.toFixed(2);
+      }
+      return String(Math.round(valor));
+    }
+
+    // ============================
+    // CONTROLE DE TELAS
+    // ============================
+    function mostrarSection(id){
+      document.querySelectorAll(".section").forEach(sec=>{
+        sec.classList.toggle("active", sec.id === id);
+      });
+      document.querySelectorAll(".tab-btn").forEach(btn=>{
+        btn.classList.toggle("active", btn.dataset.target === id);
+      });
+    }
+
+    document.querySelectorAll(".tab-btn").forEach(btn=>{
+      btn.addEventListener("click", ()=>{
+        const target = btn.dataset.target;
+        if(target) mostrarSection(target);
+      });
+    });
+
+    document.querySelectorAll(".home-btn").forEach(btn=>{
+      btn.addEventListener("click", ()=>{
+        const target = btn.dataset.go;
+        if(target) mostrarSection(target);
+      });
+    });
+
+    // ============================
+    // CAMPOS NUMÉRICOS (LANÇAMENTO) COM NUMERAÇÃO
+    // ============================
+    function montarCamposNumericos(){
+      const container = document.getElementById("camposNumericos");
+      container.innerHTML = "";
+
+      let contador = 1;
+
+      GRUPOS.forEach((grupo)=>{
+        const titulo = document.createElement("div");
+        titulo.className = "grupo-titulo";
+        titulo.textContent = grupo.titulo;
+        container.appendChild(titulo);
+
+        const chunkSize = 2;
+        for(let i=0;i<grupo.campos.length;i+=chunkSize){
+          const row = document.createElement("div");
+          row.className = "form-row";
+          grupo.campos.slice(i,i+chunkSize).forEach(c=>{
+            const f = document.createElement("div");
+            f.className = "field";
+
+            const lbl = document.createElement("label");
+            const numStr = String(contador).padStart(2,"0");
+            lbl.textContent = numStr + " - " + c.label;
+            lbl.htmlFor = "campo_"+c.id;
+
+            const inp = document.createElement("input");
+            inp.type = "number";
+            inp.min = "0";
+            inp.step = c.step || "1";
+            inp.id = "campo_"+c.id;
+            inp.name = c.id;
+            inp.placeholder = "0";
+
+            f.appendChild(lbl);
+            f.appendChild(inp);
+            row.appendChild(f);
+
+            contador++;
+          });
+          container.appendChild(row);
+        }
+      });
+    }
+
+    // ============================
+    // FIREBASE (REST) - FUNÇÕES
+    // ============================
+    async function firebaseSalvarLancamento(lancamento){
+      const url = DB_URL + "/operacoes.json";
+      const resp = await fetch(url, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(lancamento)
+      });
+      if(!resp.ok){
+        throw new Error("Erro ao salvar no Firebase: " + resp.status);
+      }
+      return resp.json(); // retorna { name: "-Nxxx" }
+    }
+
+    async function firebaseCarregarLancamentos(){
+      const url = DB_URL + "/operacoes.json";
+      const resp = await fetch(url);
+      if(!resp.ok){
+        throw new Error("Erro ao carregar dados do Firebase: " + resp.status);
+      }
+      const data = await resp.json();
+      if(!data) return [];
+      const lista = [];
+      for(const key in data){
+        if(Object.prototype.hasOwnProperty.call(data,key)){
+          lista.push({
+            firebaseKey: key,
+            ...data[key]
+          });
+        }
+      }
+      return lista;
+    }
+
+    // ============================
+    // FORMULÁRIO DE LANÇAMENTO
+    // ============================
+    const formLancamento = document.getElementById("formLancamento");
+    const alertForm = document.getElementById("alertForm");
+    const btnLimpar = document.getElementById("btnLimpar");
+
+    function mostrarAlertaForm(msg, ok=true){
+      alertForm.textContent = msg;
+      alertForm.classList.remove("ok","error");
+      alertForm.classList.add(ok ? "ok":"error");
+      alertForm.style.display = "block";
+      setTimeout(()=>{ alertForm.style.display = "none"; }, 4500);
+    }
+
+    function ajustarDatasPadrao(){
+      const hoje = new Date();
+      const iso = hoje.toISOString().slice(0,10);
+      const dataOp = document.getElementById("dataOperacao");
+      const dataRes = document.getElementById("dataResumo");
+      if(dataOp && !dataOp.value) dataOp.value = iso;
+      if(dataRes && !dataRes.value) dataRes.value = iso;
+    }
+
+    formLancamento.addEventListener("submit", async (e)=>{
+      e.preventDefault();
+
+      const dataOperacao = document.getElementById("dataOperacao").value;
+      const cidade = document.getElementById("cidade").value;
+      const viatura = document.getElementById("viatura").value.trim();
+      const re = document.getElementById("re").value.trim();
+
+      if(!dataOperacao){
+        mostrarAlertaForm("Informe a data da operação.", false);
+        return;
+      }
+      if(!cidade || !viatura || !re){
+        mostrarAlertaForm("Preencha cidade, viatura e RE.", false);
+        return;
+      }
+
+      const camposValores = {};
+      const todos = getTodosCampos();
+      todos.forEach(c=>{
+        const inp = document.getElementById("campo_"+c.id);
+        let vStr = (inp.value || "").toString().replace(",", ".");
+        let valor = vStr === "" ? 0 : parseFloat(vStr);
+        if(isNaN(valor)) valor = 0;
+        camposValores[c.id] = valor;
+      });
+
+      const lancamento = {
+        dataOperacao,
+        cidade,
+        viatura,
+        re,
+        campos: camposValores,
+        criadoEm: new Date().toISOString()
+      };
+
+      try{
+        await firebaseSalvarLancamento(lancamento);
+        mostrarAlertaForm("Lançamento salvo com sucesso no Firebase!", true);
+        formLancamento.reset();
+        ajustarDatasPadrao();
+      }catch(err){
+        console.error(err);
+        mostrarAlertaForm("Erro ao salvar no Firebase. Verifique conexão ou regras.", false);
+      }
+    });
+
+    btnLimpar.addEventListener("click", ()=>{
+      formLancamento.reset();
+      ajustarDatasPadrao();
+    });
+
+    // ============================
+    // VISUALIZAÇÃO / RESUMO
+    // ============================
+    const dataResumoInput = document.getElementById("dataResumo");
+    const cidadeResumoSelect = document.getElementById("cidadeResumo");
+    const btnAtualizarResumo = document.getElementById("btnAtualizarResumo");
+    const semDadosResumo = document.getElementById("semDadosResumo");
+    const tabelasResumo = document.getElementById("tabelasResumo");
+    const resumoCampos = document.getElementById("resumoCampos");
+    const textoRodapeResumo = document.getElementById("textoRodapeResumo");
+    const tabelaDetalhes = document.getElementById("tabelaDetalhes");
+
+    function montarResumoIndicadores(mapaValores){
+      resumoCampos.innerHTML = "";
+      let contador = 1;
+
+      GRUPOS.forEach((grupo)=>{
+        const titulo = document.createElement("div");
+        titulo.className = "grupo-titulo";
+        titulo.textContent = grupo.titulo;
+        resumoCampos.appendChild(titulo);
+
+        const chunkSize = 2;
+        for(let i=0;i<grupo.campos.length;i+=chunkSize){
+          const row = document.createElement("div");
+          row.className = "form-row";
+          grupo.campos.slice(i,i+chunkSize).forEach(c=>{
+            const f = document.createElement("div");
+            f.className = "field";
+
+            const lbl = document.createElement("label");
+            const numStr = String(contador).padStart(2,"0");
+            lbl.textContent = numStr + " - " + c.label;
+            lbl.htmlFor = "resumo_"+c.id;
+
+            const inp = document.createElement("input");
+            inp.type = "text";
+            inp.readOnly = true;
+            inp.classList.add("readonly-value");
+            const val = mapaValores[c.id] != null ? mapaValores[c.id] : 0;
+            inp.value = formatValor(c.id, val);
+            inp.id = "resumo_"+c.id;
+
+            f.appendChild(lbl);
+            f.appendChild(inp);
+            row.appendChild(f);
+
+            contador++;
+          });
+          resumoCampos.appendChild(row);
+        }
+      });
+    }
+
+    async function atualizarResumo(){
+      const data = dataResumoInput.value;
+      const cidadeFiltro = cidadeResumoSelect.value; // "" = toda companhia
+
+      if(!data){
+        semDadosResumo.textContent = "Selecione uma data para visualizar o resumo.";
+        semDadosResumo.style.display = "block";
+        tabelasResumo.style.display = "none";
+        return;
+      }
+
+      let lancamentos;
+      try{
+        const todosLanc = await firebaseCarregarLancamentos();
+        lancamentos = todosLanc.filter(l => l.dataOperacao === data);
+      }catch(err){
+        console.error(err);
+        semDadosResumo.textContent = "Erro ao carregar dados do Firebase. Verifique conexão ou regras.";
+        semDadosResumo.style.display = "block";
+        tabelasResumo.style.display = "none";
+        return;
+      }
+
+      if(cidadeFiltro){
+        lancamentos = lancamentos.filter(l => l.cidade === cidadeFiltro);
+      }
+
+      if(lancamentos.length === 0){
+        semDadosResumo.textContent = "Nenhum lançamento encontrado para o filtro selecionado.";
+        semDadosResumo.style.display = "block";
+        tabelasResumo.style.display = "none";
+        return;
+      }
+
+      semDadosResumo.style.display = "none";
+      tabelasResumo.style.display = "block";
+
+      const todos = getTodosCampos();
+      const totalMapa = {};
+      todos.forEach(c => { totalMapa[c.id] = 0; });
+
+      lancamentos.forEach(l=>{
+        todos.forEach(c=>{
+          const v = parseFloat(l.campos && l.campos[c.id] != null ? l.campos[c.id] : 0) || 0;
+          totalMapa[c.id] += v;
+        });
+      });
+
+      if(cidadeFiltro){
+        textoRodapeResumo.textContent = 'Resumo consolidado apenas para o município de ' + cidadeFiltro + ' na data selecionada.';
+      }else{
+        textoRodapeResumo.textContent = 'Resumo consolidado de toda a 2ª Companhia na data selecionada.';
+      }
+
+      montarResumoIndicadores(totalMapa);
+
+      // Tabela detalhada por viatura
+      tabelaDetalhes.innerHTML = "";
+      const theadDet = document.createElement("thead");
+      const headRowDet = document.createElement("tr");
+      ["Data","Município","Viatura","RE"].forEach(t=>{
+        const thd = document.createElement("th");
+        thd.textContent = t;
+        headRowDet.appendChild(thd);
+      });
+      todos.forEach(c=>{
+        const thd = document.createElement("th");
+        thd.textContent = c.label;
+        headRowDet.appendChild(thd);
+      });
+      theadDet.appendChild(headRowDet);
+      tabelaDetalhes.appendChild(theadDet);
+
+      const tbodyDet = document.createElement("tbody");
+      lancamentos.forEach(l=>{
+        const row = document.createElement("tr");
+        const colsBase = [
+          l.dataOperacao || "",
+          l.cidade || "",
+          l.viatura || "",
+          l.re || ""
+        ];
+        colsBase.forEach(v=>{
+          const td = document.createElement("td");
+          td.textContent = v;
+          row.appendChild(td);
+        });
+        todos.forEach(c=>{
+          const td = document.createElement("td");
+          const v = parseFloat(l.campos && l.campos[c.id] != null ? l.campos[c.id] : 0) || 0;
+          td.textContent = formatValor(c.id, v);
+          row.appendChild(td);
+        });
+        tbodyDet.appendChild(row);
+      });
+      tabelaDetalhes.appendChild(tbodyDet);
+    }
+
+    btnAtualizarResumo.addEventListener("click", atualizarResumo);
+    dataResumoInput.addEventListener("change", atualizarResumo);
+    cidadeResumoSelect.addEventListener("change", atualizarResumo);
+
+    // ============================
+    // INICIALIZAÇÃO
+    // ============================
+    document.addEventListener("DOMContentLoaded", ()=>{
+      montarCamposNumericos();
+      ajustarDatasPadrao();
+    });
+  </script>
+</body>
+</html>
