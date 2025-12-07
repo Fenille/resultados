@@ -292,11 +292,11 @@
       margin-top:6px;
     }
 
-    /* ===================== MOBILE – TUDO EXTREMAMENTE COMPACTO ===================== */
+    /* ===================== MOBILE – AJUSTE SEM ESPAÇOS ENTRE CAIXAS ===================== */
     @media(max-width:720px){
 
       body{
-        padding:6px 4px 8px !important;
+        padding:6px 4px 10px !important;
       }
 
       .shell{
@@ -306,7 +306,7 @@
 
       header{
         flex-direction:column;
-        gap:2px !important;
+        gap:1px !important;
         margin-bottom:4px !important;
         padding-bottom:4px !important;
       }
@@ -322,7 +322,7 @@
 
       .tabs-top{
         flex-direction:column;
-        gap:3px !important;
+        gap:2px !important;
         margin-bottom:4px !important;
       }
 
@@ -337,39 +337,30 @@
       }
 
       .card{
-        padding:8px 6px !important;
+        padding:6px 4px !important;
       }
 
       .card h2{
         font-size:0.9rem !important;
-        margin-bottom:3px !important;
+        margin-bottom:2px !important;
       }
 
       .card p.desc{
         font-size:0.74rem !important;
-        margin-bottom:4px !important;
+        margin-bottom:3px !important;
       }
 
-      .filters{
-        gap:4px !important;
-        margin-bottom:4px !important;
-      }
-
-      .filters .field{
-        min-width:100% !important;
-      }
-
-      /* FORMULÁRIO – campos praticamente colados */
+      /* FORMULÁRIO – CAMPOS COLADOS */
       .form-row{
         flex-direction:column;
         gap:0 !important;
-        margin:0 0 2px !important;
+        margin:0 0 2px 0 !important;
       }
 
       .field{
         min-width:100% !important;
         gap:0 !important;
-        margin:0 !important;
+        margin:0 0 2px 0 !important;
       }
 
       .field label{
@@ -387,8 +378,8 @@
       }
 
       .grupo-titulo{
-        margin-top:4px !important;
-        margin-bottom:1px !important;
+        margin-top:6px !important;
+        margin-bottom:2px !important;
         padding-top:2px !important;
         font-size:0.76rem !important;
       }
@@ -404,6 +395,17 @@
         justify-content:center;
         padding:6px 8px !important;
         font-size:0.74rem !important;
+      }
+
+      /* VISUALIZAR RESULTADOS – FILTROS COLADOS */
+      .filters{
+        gap:2px !important;
+        margin-bottom:4px !important;
+      }
+
+      .filters .field{
+        min-width:100% !important;
+        margin:0 !important;
       }
 
       th,td{
@@ -422,15 +424,17 @@
         font-size:0.7rem !important;
       }
 
-      /* 🔥 RESUMO DOS INDICADORES – ESPAÇAMENTO NO TAL0 */
+      /* RESUMO DOS INDICADORES – CAMPOS COLADOS */
       #resumoCampos .form-row{
+        flex-direction:column;
         gap:0 !important;
-        margin:0 0 2px !important;
+        margin:0 0 2px 0 !important;
       }
 
       #resumoCampos .field{
+        min-width:100% !important;
         gap:0 !important;
-        margin:0 !important;
+        margin:0 0 2px 0 !important;
       }
 
       #resumoCampos .field label{
@@ -447,7 +451,7 @@
 
       #resumoCampos .grupo-titulo{
         margin-top:4px !important;
-        margin-bottom:1px !important;
+        margin-bottom:2px !important;
         padding:2px 0 0 0 !important;
       }
     }
