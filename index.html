@@ -16,22 +16,24 @@
       --radius:14px;
       --shadow-soft:0 14px 40px rgba(0,0,0,0.8);
     }
+
     *{box-sizing:border-box;margin:0;padding:0;}
+
     body{
       min-height:100vh;
-      background:
-        radial-gradient(circle at top, #202020 0, #050509 48%, #000 100%);
-      font-family:Arial,Helvetica,sans-serif;
-      color:var(--amarelo);
-      display:flex;
-      justify-content:center;
-      align-items:flex-start;
-      padding:24px 10px 40px;
+      background: radial-gradient(circle at top, #202020 0, #050509 48%, #000 100%);
+      font-family: Arial, Helvetica, sans-serif;
+      color: var(--amarelo);
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      padding: 24px 10px 40px;
     }
+
     .shell{
       width:100%;
       max-width:1200px;
-      background:radial-gradient(circle at top, #1c1c1c 0, #050509 55%, #000 100%);
+      background: radial-gradient(circle at top, #1c1c1c 0, #050509 55%, #000 100%);
       border-radius:22px;
       border:1px solid #444;
       padding:22px 18px 28px;
@@ -39,6 +41,7 @@
       position:relative;
       overflow:hidden;
     }
+
     .shell::before{
       content:"";
       position:absolute;
@@ -49,34 +52,33 @@
       opacity:0.9;
       pointer-events:none;
     }
-    .shell-inner{
-      position:relative;
-      z-index:1;
-    }
+
+    .shell-inner{ position:relative; z-index:1; }
 
     header{
       display:flex;
       flex-wrap:wrap;
       align-items:center;
       justify-content:space-between;
-      gap:12px;
       margin-bottom:18px;
       padding-bottom:12px;
       border-bottom:1px solid rgba(255,255,255,0.08);
     }
+
     .titulo{
       font-size:1.4rem;
       font-weight:700;
-      letter-spacing:0.04em;
-      text-transform:uppercase;
       text-shadow:0 0 8px rgba(255,255,0,0.55);
+      text-transform:uppercase;
     }
+
     .subtitulo{
       font-size:0.86rem;
       color:var(--cinza);
       text-transform:uppercase;
       letter-spacing:0.15em;
     }
+
     .badge{
       font-size:0.75rem;
       padding:4px 10px;
@@ -94,59 +96,51 @@
       margin-bottom:16px;
       flex-wrap:wrap;
     }
+
     .tab-btn{
       flex:1 1 140px;
       border-radius:999px;
       border:1px solid rgba(255,255,255,0.18);
       background:radial-gradient(circle at top, rgba(255,255,255,0.06), rgba(0,0,0,0.88));
       padding:10px 14px;
-      font-size:0.92rem;
       text-transform:uppercase;
       letter-spacing:0.16em;
       cursor:pointer;
       color:var(--cinza);
       display:flex;
-      align-items:center;
       justify-content:center;
+      align-items:center;
       gap:6px;
       transition:all .18s ease-out;
     }
-    .tab-btn span.icon{
-      font-size:1rem;
-    }
+
     .tab-btn.active{
       color:#000;
       background:linear-gradient(135deg, var(--amarelo-neon), #ffe45c);
       border-color:#000;
       box-shadow:0 0 22px rgba(255,255,0,0.5);
-      text-shadow:none;
-    }
-    .tab-btn:hover{
-      transform:translateY(-1px);
-      box-shadow:0 8px 18px rgba(0,0,0,0.8);
     }
 
-    .section{
-      display:none;
-      margin-top:4px;
-    }
-    .section.active{
-      display:block;
-    }
+    .tab-btn span.icon{ font-size:1rem; }
+
+    .section{ display:none; margin-top:4px; }
+    .section.active{ display:block; }
 
     .card{
       background:var(--card-bg);
       border-radius:var(--radius);
       border:1px solid rgba(255,255,255,0.15);
+      padding:18px 16px;
       box-shadow:var(--shadow-soft);
-      padding:18px 16px 18px;
     }
+
     .card h2{
       font-size:1.05rem;
-      margin-bottom:10px;
       text-transform:uppercase;
+      margin-bottom:10px;
       letter-spacing:0.16em;
     }
+
     .card p.desc{
       font-size:0.85rem;
       color:var(--cinza);
@@ -155,58 +149,58 @@
 
     .grid-home{
       display:grid;
-      grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+      grid-template-columns:repeat(auto-fit, minmax(220px,1fr));
       gap:16px;
       margin-top:8px;
     }
+
     .home-btn{
       border-radius:18px;
       border:1px solid #000;
       background:linear-gradient(135deg,var(--amarelo-neon),#ffd94a);
       padding:18px 16px;
       cursor:pointer;
-      text-align:left;
+      color:#000;
+      box-shadow:0 0 16px rgba(255,255,0,0.6);
       display:flex;
       flex-direction:column;
       gap:4px;
-      transition:all .18s ease-out;
-      color:#000;
-      box-shadow:0 0 16px rgba(255,255,0,0.6);
     }
+
     .home-btn strong{
       font-size:0.98rem;
       text-transform:uppercase;
       letter-spacing:0.14em;
     }
+
     .home-btn small{
       font-size:0.8rem;
       color:#333;
     }
-    .home-btn:hover{
-      transform:translateY(-2px);
-      box-shadow:0 12px 30px rgba(0,0,0,0.9);
-    }
 
     .form-row{
       display:flex;
-      flex-wrap:wrap;
       gap:12px;
       margin-bottom:10px;
+      flex-wrap:wrap;
     }
+
     .field{
       flex:1 1 160px;
-      min-width:150px;
       display:flex;
       flex-direction:column;
       gap:4px;
+      min-width:150px;
       font-size:0.85rem;
     }
+
     .field label{
       text-transform:uppercase;
-      letter-spacing:0.16em;
       font-size:0.75rem;
       color:var(--cinza);
+      letter-spacing:0.14em;
     }
+
     .field input,
     .field select{
       border-radius:999px;
@@ -216,11 +210,7 @@
       padding:8px 13px;
       font-size:0.9rem;
       outline:none;
-      text-align:left; /* valores à esquerda */
-    }
-
-    .readonly-value{
-      background:rgba(10,10,10,0.9);
+      text-align:left;
     }
 
     .field input:focus,
@@ -229,15 +219,19 @@
       box-shadow:0 0 0 1px rgba(255,255,0,0.35);
     }
 
+    .readonly-value{
+      background:rgba(10,10,10,0.9);
+    }
+
     .grupo-titulo{
       margin-top:14px;
       margin-bottom:4px;
       padding-top:8px;
       border-top:1px solid rgba(255,255,255,0.14);
       font-size:0.86rem;
+      color:var(--cinza);
       text-transform:uppercase;
       letter-spacing:0.14em;
-      color:var(--cinza);
     }
 
     .form-actions{
@@ -247,30 +241,34 @@
       gap:10px;
       justify-content:flex-end;
     }
+
     .btn{
       border-radius:999px;
-      border:1px solid rgba(255,255,255,0.3);
       padding:9px 18px;
-      font-size:0.82rem;
+      border:1px solid rgba(255,255,255,0.3);
       text-transform:uppercase;
-      letter-spacing:0.16em;
       cursor:pointer;
+      letter-spacing:0.16em;
       background:radial-gradient(circle at top, rgba(255,255,255,0.12), rgba(0,0,0,0.92));
       color:var(--amarelo-neon);
       display:inline-flex;
       align-items:center;
       gap:6px;
+      font-size:0.82rem;
     }
+
     .btn.primary{
       background:linear-gradient(135deg, var(--amarelo-neon), #ffd94a);
       color:#000;
       border-color:#000;
       box-shadow:0 0 16px rgba(255,255,0,0.55);
     }
+
     .btn.danger{
-      border-color:#d55;
-      color:#f88;
+      color:#ff8080;
+      border-color:#990000;
     }
+
     .btn:disabled{
       opacity:0.5;
       cursor:not-allowed;
@@ -286,10 +284,12 @@
       background:rgba(0,0,0,0.7);
       display:none;
     }
+
     .alert.ok{
       border-color:#4caf50;
       color:#bdfcbf;
     }
+
     .alert.error{
       border-color:#f44336;
       color:#ffc1c1;
@@ -309,52 +309,81 @@
       margin-top:8px;
       font-size:0.8rem;
     }
-    thead{
-      background:rgba(255,255,255,0.06);
-    }
+
+    thead{ background:rgba(255,255,255,0.06); }
+
     th,td{
       padding:6px 6px;
       border-bottom:1px solid rgba(255,255,255,0.08);
       text-align:right;
       white-space:nowrap;
     }
-    th:first-child, td:first-child{
-      text-align:left;
-    }
+
+    th:first-child, td:first-child{ text-align:left; }
+
     .muted{
       color:var(--cinza-medio);
       font-size:0.78rem;
       margin-top:6px;
     }
 
+    /* MOBILE OTIMIZADO */
     @media(max-width:720px){
+
       .shell{
         padding:16px 10px 20px;
         border-radius:16px;
       }
+
       header{
         flex-direction:column;
         align-items:flex-start;
       }
-      .titulo{
-        font-size:1.1rem;
-      }
-      .tabs-top{
-        flex-direction:column;
-      }
+
+      .titulo{ font-size:1.1rem; }
+
+      .tabs-top{ flex-direction:column; }
+
       .form-row{
         flex-direction:column;
+        gap:6px !important;
+        margin-bottom:6px !important;
       }
+
       .field{
         min-width:100%;
+        margin-bottom:4px !important;
       }
+
+      .field input,
+      .field select{
+        padding:6px 10px !important;
+      }
+
+      .field label{
+        font-size:0.70rem !important;
+        letter-spacing:0.09em !important;
+        margin-bottom:1px !important;
+      }
+
+      .readonly-value{
+        font-size:0.82rem !important;
+      }
+
+      .grupo-titulo{
+        margin-top:10px !important;
+        margin-bottom:4px !important;
+      }
+
       .btn{
         width:100%;
         justify-content:center;
       }
+
       .home-btn{
         width:100%;
       }
+
       th,td{
         font-size:0.74rem;
       }
@@ -372,16 +401,15 @@
         <div class="badge">Uso interno • Lançamento &amp; Resumo</div>
       </header>
 
-      <!-- Abas superiores -->
       <div class="tabs-top">
         <button class="tab-btn active" data-target="home">
           <span class="icon">🏠</span><span>Início</span>
         </button>
         <button class="tab-btn" data-target="form">
-          <span class="icon">✏️</span><span>Lançar Resultados</span>
+          <span class="icon">✏️</span><span>Lançar Resultado</span>
         </button>
         <button class="tab-btn" data-target="view">
-          <span class="icon">📊</span><span>Visualizar Resumo</span>
+          <span class="icon">📊</span><span>Visualizar Resultados</span>
         </button>
       </div>
 
@@ -390,12 +418,12 @@
         <div class="card">
           <h2>Painel Inicial</h2>
           <p class="desc">
-            Escolha abaixo se deseja fazer o <strong>lançamento</strong> dos resultados
+            Escolha abaixo se deseja <strong>lançar</strong> os resultados
             da operação ou apenas <strong>visualizar</strong> o resumo consolidado.
           </p>
           <div class="grid-home">
             <button class="home-btn" data-go="form">
-              <strong>Inserir Resultados</strong>
+              <strong>Lançar Resultado</strong>
               <small>Campo de preenchimento para as viaturas (data, cidade, viatura, RE e indicadores).</small>
             </button>
             <button class="home-btn" data-go="view">
@@ -449,7 +477,6 @@
               </div>
             </div>
 
-            <!-- Campos numéricos (gerados via JS com numeração à esquerda) -->
             <div id="camposNumericos"></div>
 
             <div class="form-actions">
@@ -505,10 +532,7 @@
 
           <div id="tabelasResumo" style="display:none;">
             <h3 style="font-size:0.9rem;margin-top:6px;">Resumo dos indicadores</h3>
-
-            <!-- Mesmo layout da inserção: grupos + campos com caixas -->
             <div id="resumoCampos"></div>
-
             <p class="muted" id="textoRodapeResumo">
               Resumo consolidado da data selecionada.
             </p>
@@ -524,15 +548,8 @@
   </div>
 
   <script>
-    // ============================
-    // CONFIG FIREBASE (REST)
-    // ============================
-    // URL base do Realtime Database (sem a parte /operacoes.json no final)
     const DB_URL = "https://resultados-1c75f-default-rtdb.firebaseio.com";
 
-    // ============================
-    // CONFIGURAÇÃO DE CAMPOS
-    // ============================
     const GRUPOS = [
       {
         titulo: "Dados Básicos",
@@ -610,17 +627,6 @@
       }
     ];
 
-    const CIDADES = [
-      "Martinópolis",
-      "Rancharia",
-      "João Ramalho",
-      "Caiabu",
-      "Indiana",
-      "Taciba",
-      "Nantes",
-      "Iepê"
-    ];
-
     const CAMPOS_MAP = {};
     GRUPOS.forEach(g => g.campos.forEach(c => { CAMPOS_MAP[c.id] = c; }));
 
@@ -638,9 +644,6 @@
       return String(Math.round(valor));
     }
 
-    // ============================
-    // CONTROLE DE TELAS
-    // ============================
     function mostrarSection(id){
       document.querySelectorAll(".section").forEach(sec=>{
         sec.classList.toggle("active", sec.id === id);
@@ -664,13 +667,9 @@
       });
     });
 
-    // ============================
-    // CAMPOS NUMÉRICOS (LANÇAMENTO) COM NUMERAÇÃO
-    // ============================
     function montarCamposNumericos(){
       const container = document.getElementById("camposNumericos");
       container.innerHTML = "";
-
       let contador = 1;
 
       GRUPOS.forEach((grupo)=>{
@@ -711,22 +710,17 @@
       });
     }
 
-    // ============================
-    // FIREBASE (REST) - FUNÇÕES
-    // ============================
     async function firebaseSalvarLancamento(lancamento){
       const url = DB_URL + "/operacoes.json";
       const resp = await fetch(url, {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify(lancamento)
       });
       if(!resp.ok){
         throw new Error("Erro ao salvar no Firebase: " + resp.status);
       }
-      return resp.json(); // retorna { name: "-Nxxx" }
+      return resp.json();
     }
 
     async function firebaseCarregarLancamentos(){
@@ -740,18 +734,12 @@
       const lista = [];
       for(const key in data){
         if(Object.prototype.hasOwnProperty.call(data,key)){
-          lista.push({
-            firebaseKey: key,
-            ...data[key]
-          });
+          lista.push({ firebaseKey: key, ...data[key] });
         }
       }
       return lista;
     }
 
-    // ============================
-    // FORMULÁRIO DE LANÇAMENTO
-    // ============================
     const formLancamento = document.getElementById("formLancamento");
     const alertForm = document.getElementById("alertForm");
     const btnLimpar = document.getElementById("btnLimpar");
@@ -759,7 +747,7 @@
     function mostrarAlertaForm(msg, ok=true){
       alertForm.textContent = msg;
       alertForm.classList.remove("ok","error");
-      alertForm.classList.add(ok ? "ok":"error");
+      alertForm.classList.add(ok ? "ok" : "error");
       alertForm.style.display = "block";
       setTimeout(()=>{ alertForm.style.display = "none"; }, 4500);
     }
@@ -825,9 +813,6 @@
       ajustarDatasPadrao();
     });
 
-    // ============================
-    // VISUALIZAÇÃO / RESUMO
-    // ============================
     const dataResumoInput = document.getElementById("dataResumo");
     const cidadeResumoSelect = document.getElementById("cidadeResumo");
     const btnAtualizarResumo = document.getElementById("btnAtualizarResumo");
@@ -881,7 +866,7 @@
 
     async function atualizarResumo(){
       const data = dataResumoInput.value;
-      const cidadeFiltro = cidadeResumoSelect.value; // "" = toda companhia
+      const cidadeFiltro = cidadeResumoSelect.value;
 
       if(!data){
         semDadosResumo.textContent = "Selecione uma data para visualizar o resumo.";
@@ -935,7 +920,6 @@
 
       montarResumoIndicadores(totalMapa);
 
-      // Tabela detalhada por viatura
       tabelaDetalhes.innerHTML = "";
       const theadDet = document.createElement("thead");
       const headRowDet = document.createElement("tr");
@@ -981,9 +965,6 @@
     dataResumoInput.addEventListener("change", atualizarResumo);
     cidadeResumoSelect.addEventListener("change", atualizarResumo);
 
-    // ============================
-    // INICIALIZAÇÃO
-    // ============================
     document.addEventListener("DOMContentLoaded", ()=>{
       montarCamposNumericos();
       ajustarDatasPadrao();
