@@ -88,7 +88,6 @@
       margin-top:4px;
     }
 
-    /* BOTÕES TOPO (apenas 2) */
     .tabs-top{
       display:flex;
       gap:8px;
@@ -292,23 +291,23 @@
       margin-top:6px;
     }
 
-    /* ===================== MOBILE – AJUSTE SEM ESPAÇOS ENTRE CAIXAS ===================== */
+    /* ===================== MOBILE – SEM ESPAÇO ENTRE CAIXAS ===================== */
     @media(max-width:720px){
 
       body{
-        padding:6px 4px 10px !important;
+        padding:6px 4px 8px !important;
       }
 
       .shell{
-        padding:8px 6px !important;
+        padding:8px 4px !important;
         border-radius:16px !important;
       }
 
       header{
         flex-direction:column;
         gap:1px !important;
-        margin-bottom:4px !important;
-        padding-bottom:4px !important;
+        margin-bottom:2px !important;
+        padding-bottom:2px !important;
       }
 
       .titulo{ font-size:1.05rem !important; }
@@ -317,7 +316,7 @@
       .badge{
         font-size:0.7rem !important;
         padding:2px 8px !important;
-        margin-top:2px !important;
+        margin-top:1px !important;
       }
 
       .tabs-top{
@@ -327,13 +326,13 @@
       }
 
       .tab-btn{
-        padding:6px 8px !important;
+        padding:5px 8px !important;
         font-size:0.78rem !important;
         letter-spacing:0.12em !important;
       }
 
       .section{
-        margin-top:2px !important;
+        margin-top:0 !important;
       }
 
       .card{
@@ -342,19 +341,19 @@
 
       .card h2{
         font-size:0.9rem !important;
-        margin-bottom:2px !important;
+        margin:0 0 2px 0 !important;
       }
 
       .card p.desc{
-        font-size:0.74rem !important;
-        margin-bottom:3px !important;
+        font-size:0.72rem !important;
+        margin:0 0 3px 0 !important;
       }
 
       /* FORMULÁRIO – CAMPOS COLADOS */
       .form-row{
         flex-direction:column;
         gap:0 !important;
-        margin:0 0 2px 0 !important;
+        margin:0 !important;
       }
 
       .field{
@@ -364,7 +363,7 @@
       }
 
       .field label{
-        font-size:0.64rem !important;
+        font-size:0.62rem !important;
         letter-spacing:0.08em !important;
         margin:0 0 1px 0 !important;
       }
@@ -372,51 +371,49 @@
       .field input,
       .field select{
         padding:2px 8px !important;
-        font-size:0.78rem !important;
+        font-size:0.76rem !important;
         height:24px !important;
         margin:0 !important;
       }
 
       .grupo-titulo{
-        margin-top:6px !important;
-        margin-bottom:2px !important;
-        padding-top:2px !important;
-        font-size:0.76rem !important;
+        margin:4px 0 1px 0 !important;
+        padding:1px 0 0 0 !important;
+        font-size:0.72rem !important;
       }
 
       .form-actions{
         margin-top:4px !important;
-        gap:4px !important;
+        gap:3px !important;
         flex-direction:column;
       }
 
       .btn{
         width:100% !important;
         justify-content:center;
-        padding:6px 8px !important;
-        font-size:0.74rem !important;
+        padding:5px 8px !important;
+        font-size:0.72rem !important;
       }
 
-      /* VISUALIZAR RESULTADOS – FILTROS COLADOS */
+      /* VISUALIZAR – FILTROS COLADOS */
       .filters{
-        gap:2px !important;
-        margin-bottom:4px !important;
+        gap:0 !important;
+        margin:0 0 4px 0 !important;
       }
 
       .filters .field{
         min-width:100% !important;
-        margin:0 !important;
+        margin:0 0 2px 0 !important;
       }
 
       th,td{
-        font-size:0.7rem !important;
-        padding:2px 2px !important;
+        font-size:0.68rem !important;
+        padding:2px !important;
       }
 
       h3{
-        margin-top:4px !important;
-        margin-bottom:2px !important;
-        font-size:0.82rem !important;
+        margin:4px 0 2px 0 !important;
+        font-size:0.8rem !important;
       }
 
       .muted{
@@ -424,11 +421,11 @@
         font-size:0.7rem !important;
       }
 
-      /* RESUMO DOS INDICADORES – CAMPOS COLADOS */
+      /* RESUMO – CAMPOS COLADOS */
       #resumoCampos .form-row{
         flex-direction:column;
         gap:0 !important;
-        margin:0 0 2px 0 !important;
+        margin:0 !important;
       }
 
       #resumoCampos .field{
@@ -439,20 +436,19 @@
 
       #resumoCampos .field label{
         margin:0 0 1px 0 !important;
-        font-size:0.64rem !important;
+        font-size:0.62rem !important;
       }
 
       #resumoCampos .field input{
         margin:0 !important;
-        padding:2px 10px !important;
-        height:24px !important;
-        font-size:0.78rem !important;
+        padding:2px 8px !important;
+        height:22px !important;
+        font-size:0.76rem !important;
       }
 
       #resumoCampos .grupo-titulo{
-        margin-top:4px !important;
-        margin-bottom:2px !important;
-        padding:2px 0 0 0 !important;
+        margin:4px 0 1px 0 !important;
+        padding:1px 0 0 0 !important;
       }
     }
   </style>
@@ -468,13 +464,12 @@
         <div class="badge">Uso interno • Lançamento &amp; Resumo</div>
       </header>
 
-      <!-- APENAS 2 BOTÕES SUPERIORES -->
       <div class="tabs-top">
         <button class="tab-btn active" data-target="form">✏️ Lançar Resultado</button>
         <button class="tab-btn" data-target="view">📊 Visualizar Resultados</button>
       </div>
 
-      <!-- ===================== FORMULÁRIO ===================== -->
+      <!-- FORMULÁRIO -->
       <section id="form" class="section active">
         <div class="card">
           <h2 id="tituloForm">Lançamento de Resultados</h2>
@@ -533,7 +528,7 @@
         </div>
       </section>
 
-      <!-- ===================== VISUALIZAÇÃO ===================== -->
+      <!-- VISUALIZAÇÃO -->
       <section id="view" class="section">
         <div class="card">
           <h2>Visualização de Resultados</h2>
@@ -682,7 +677,6 @@
       return String(Math.round(valor));
     }
 
-    // Tabs
     function mostrarSection(id){
       document.querySelectorAll(".section").forEach(sec=>{
         sec.classList.toggle("active", sec.id === id);
@@ -696,7 +690,6 @@
       btn.addEventListener("click", ()=>mostrarSection(btn.dataset.target));
     });
 
-    // Montar campos numericos
     function montarCamposNumericos(){
       const container = document.getElementById("camposNumericos");
       container.innerHTML = "";
@@ -741,7 +734,6 @@
       });
     }
 
-    // Firebase helpers
     async function firebaseSalvarLancamento(lancamento){
       const url = DB_URL + "/operacoes.json";
       const resp = await fetch(url, {
@@ -757,7 +749,7 @@
       const url = DB_URL + "/operacoes/" + encodeURIComponent(key) + ".json";
       const resp = await fetch(url, {
         method: "PUT",
-        headers: {"Content-Type":"application/json"},
+        headers:{"Content-Type":"application/json"},
         body: JSON.stringify(lancamento)
       });
       if(!resp.ok) throw new Error("Erro ao atualizar: "+resp.status);
@@ -854,9 +846,9 @@
       e.preventDefault();
 
       const dataOperacao = document.getElementById("dataOperacao").value;
-      const cidade = document.getElementById("cidade").value;
-      const viatura = document.getElementById("viatura").value.trim();
-      const re      = document.getElementById("re").value.trim();
+      const cidade       = document.getElementById("cidade").value;
+      const viatura      = document.getElementById("viatura").value.trim();
+      const re           = document.getElementById("re").value.trim();
 
       if(!dataOperacao || !cidade || !viatura || !re){
         mostrarAlertaForm("Preencha data, cidade, viatura e RE.", false);
@@ -903,14 +895,13 @@
       if(editingKey) sairModoEdicao();
     });
 
-    // VISUALIZAÇÃO
-    const dataResumoInput = document.getElementById("dataResumo");
-    const cidadeResumoSelect = document.getElementById("cidadeResumo");
-    const btnAtualizarResumo = document.getElementById("btnAtualizarResumo");
-    const semDadosResumo = document.getElementById("semDadosResumo");
-    const tabelasResumo = document.getElementById("tabelasResumo");
-    const resumoCampos = document.getElementById("resumoCampos");
-    const tabelaDetalhes = document.getElementById("tabelaDetalhes");
+    const dataResumoInput      = document.getElementById("dataResumo");
+    const cidadeResumoSelect   = document.getElementById("cidadeResumo");
+    const btnAtualizarResumo   = document.getElementById("btnAtualizarResumo");
+    const semDadosResumo       = document.getElementById("semDadosResumo");
+    const tabelasResumo        = document.getElementById("tabelasResumo");
+    const resumoCampos         = document.getElementById("resumoCampos");
+    const tabelaDetalhes       = document.getElementById("tabelaDetalhes");
 
     function montarResumoIndicadores(mapa){
       resumoCampos.innerHTML = "";
@@ -955,13 +946,13 @@
     }
 
     async function atualizarResumo(){
-      const data = dataResumoInput.value;
+      const data         = dataResumoInput.value;
       const cidadeFiltro = cidadeResumoSelect.value;
 
       if(!data){
         semDadosResumo.textContent = "Selecione uma data para visualizar o resumo.";
         semDadosResumo.style.display = "block";
-        tabelasResumo.style.display = "none";
+        tabelasResumo.style.display  = "none";
         return;
       }
 
@@ -973,7 +964,7 @@
         console.error(err);
         semDadosResumo.textContent = "Erro ao carregar dados do Firebase.";
         semDadosResumo.style.display = "block";
-        tabelasResumo.style.display = "none";
+        tabelasResumo.style.display  = "none";
         return;
       }
 
@@ -984,12 +975,12 @@
       if(lancamentos.length === 0){
         semDadosResumo.textContent = "Nenhum lançamento encontrado para o filtro.";
         semDadosResumo.style.display = "block";
-        tabelasResumo.style.display = "none";
+        tabelasResumo.style.display  = "none";
         return;
       }
 
       semDadosResumo.style.display = "none";
-      tabelasResumo.style.display = "block";
+      tabelasResumo.style.display  = "block";
 
       const todosCampos = getTodosCampos();
       const mapa = {};
@@ -1004,10 +995,9 @@
 
       montarResumoIndicadores(mapa);
 
-      // tabela detalhada
       tabelaDetalhes.innerHTML = "";
       const thead = document.createElement("thead");
-      const trh = document.createElement("tr");
+      const trh   = document.createElement("tr");
 
       ["Editar","Data","Município","Viatura","RE"].forEach(t=>{
         const th = document.createElement("th");
@@ -1027,8 +1017,8 @@
         const tr = document.createElement("tr");
 
         const tdEdit = document.createElement("td");
-        const btnE = document.createElement("button");
-        btnE.type = "button";
+        const btnE   = document.createElement("button");
+        btnE.type    = "button";
         btnE.className = "btn small";
         btnE.textContent = "Editar";
         btnE.addEventListener("click", ()=>entrarModoEdicao(l));
@@ -1044,7 +1034,7 @@
 
         todosCampos.forEach(c=>{
           const td = document.createElement("td");
-          const v = parseFloat(l.campos && l.campos[c.id] != null ? l.campos[c.id] : 0) || 0;
+          const v  = parseFloat(l.campos && l.campos[c.id] != null ? l.campos[c.id] : 0) || 0;
           td.textContent = formatValor(c.id, v);
           tr.appendChild(td);
         });
