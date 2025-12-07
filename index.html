@@ -291,15 +291,15 @@
       margin-top:6px;
     }
 
-    /* ===================== MOBILE – SEM ESPAÇO ENTRE CAIXAS ===================== */
+    /* ===================== MOBILE – TUDO ESPREMIDO ===================== */
     @media(max-width:720px){
 
       body{
-        padding:6px 4px 8px !important;
+        padding:4px !important;
       }
 
       .shell{
-        padding:8px 4px !important;
+        padding:6px 4px !important;
         border-radius:16px !important;
       }
 
@@ -312,7 +312,6 @@
 
       .titulo{ font-size:1.05rem !important; }
       .subtitulo{ font-size:0.72rem !important; }
-
       .badge{
         font-size:0.7rem !important;
         padding:2px 8px !important;
@@ -322,7 +321,7 @@
       .tabs-top{
         flex-direction:column;
         gap:2px !important;
-        margin-bottom:4px !important;
+        margin-bottom:3px !important;
       }
 
       .tab-btn{
@@ -349,53 +348,57 @@
         margin:0 0 3px 0 !important;
       }
 
-      /* FORMULÁRIO – CAMPOS COLADOS */
+      /* ---------- FORMULÁRIO (INSERIR) ---------- */
       .form-row{
-        flex-direction:column;
+        flex-direction:column !important;
         gap:0 !important;
         margin:0 !important;
+        padding:0 !important;
       }
 
       .field{
         min-width:100% !important;
+        margin:0 !important;
+        padding:0 !important;
         gap:0 !important;
-        margin:0 0 2px 0 !important;
       }
 
       .field label{
         font-size:0.62rem !important;
         letter-spacing:0.08em !important;
         margin:0 0 1px 0 !important;
+        padding:0 !important;
       }
 
       .field input,
       .field select{
-        padding:2px 8px !important;
+        padding:3px 8px !important;
         font-size:0.76rem !important;
         height:24px !important;
         margin:0 !important;
       }
 
       .grupo-titulo{
-        margin:4px 0 1px 0 !important;
-        padding:1px 0 0 0 !important;
+        margin:4px 0 2px 0 !important;
+        padding:0 !important;
         font-size:0.72rem !important;
       }
 
       .form-actions{
-        margin-top:4px !important;
-        gap:3px !important;
-        flex-direction:column;
+        margin:4px 0 0 0 !important;
+        padding:0 !important;
+        gap:4px !important;
+        flex-direction:column !important;
       }
 
       .btn{
         width:100% !important;
         justify-content:center;
-        padding:5px 8px !important;
+        padding:6px 8px !important;
         font-size:0.72rem !important;
       }
 
-      /* VISUALIZAR – FILTROS COLADOS */
+      /* ---------- VISUALIZAR / FILTROS ---------- */
       .filters{
         gap:0 !important;
         margin:0 0 4px 0 !important;
@@ -421,17 +424,19 @@
         font-size:0.7rem !important;
       }
 
-      /* RESUMO – CAMPOS COLADOS */
+      /* ---------- RESUMO DOS INDICADORES ---------- */
       #resumoCampos .form-row{
-        flex-direction:column;
+        flex-direction:column !important;
         gap:0 !important;
         margin:0 !important;
+        padding:0 !important;
       }
 
       #resumoCampos .field{
         min-width:100% !important;
-        gap:0 !important;
         margin:0 0 2px 0 !important;
+        padding:0 !important;
+        gap:0 !important;
       }
 
       #resumoCampos .field label{
@@ -443,12 +448,12 @@
         margin:0 !important;
         padding:2px 8px !important;
         height:22px !important;
-        font-size:0.76rem !important;
+        font-size:0.75rem !important;
       }
 
       #resumoCampos .grupo-titulo{
-        margin:4px 0 1px 0 !important;
-        padding:1px 0 0 0 !important;
+        margin:4px 0 2px 0 !important;
+        padding:0 !important;
       }
     }
   </style>
@@ -469,7 +474,7 @@
         <button class="tab-btn" data-target="view">📊 Visualizar Resultados</button>
       </div>
 
-      <!-- FORMULÁRIO -->
+      <!-- ===================== FORMULÁRIO ===================== -->
       <section id="form" class="section active">
         <div class="card">
           <h2 id="tituloForm">Lançamento de Resultados</h2>
@@ -528,7 +533,7 @@
         </div>
       </section>
 
-      <!-- VISUALIZAÇÃO -->
+      <!-- ===================== VISUALIZAÇÃO ===================== -->
       <section id="view" class="section">
         <div class="card">
           <h2>Visualização de Resultados</h2>
