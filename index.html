@@ -619,9 +619,9 @@
       {
         titulo: "Drogas (em quilogramas)",
         campos: [
-          { id: "cocaina_kg", label: "Cocaína (kg)", step: "0.01" },
-          { id: "crack_kg", label: "Crack (kg)", step: "0.01" },
-          { id: "maconha_kg", label: "Maconha (kg)", step: "0.01" },
+          { id: "cocaina_kg", label: "Cocaína (kg)", step: "0.001" },
+          { id: "crack_kg", label: "Crack (kg)", step: "0.001" },
+          { id: "maconha_kg", label: "Maconha (kg)", step: "0.001" },
           { id: "outra_droga_kg", label: "Outra (kg)", step: "0.01" }
         ]
       },
@@ -681,10 +681,16 @@
       return arr;
     }
 
+    // 🔧 Ajustado para 3 casas decimais em maconha, crack e cocaína
     function formatValor(campoId, valor){
+      if (["cocaina_kg","crack_kg","maconha_kg"].includes(campoId)){
+        return Number(valor).toFixed(3);
+      }
+
       const meta = CAMPOS_MAP[campoId];
-      if(meta && meta.step === "0.01"){
-        return Number(valor).toFixed(2);
+      if(meta && meta.step && meta.step.includes(".")){
+        const casas = meta.step.split(".")[1].length;
+        return Number(valor).toFixed(casas);
       }
       return String(Math.round(valor));
     }
