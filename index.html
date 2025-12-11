@@ -524,6 +524,19 @@
               </div>
             </div>
 
+            <!-- NOVO CAMPO: TURNO -->
+            <div class="form-row">
+              <div class="field">
+                <label for="turno">Turno</label>
+                <select id="turno" name="turno" required>
+                  <option value="">Selecione...</option>
+                  <option>Diurno</option>
+                  <option>Noturno até 0h</option>
+                  <option>Noturno após 0h</option>
+                </select>
+              </div>
+            </div>
+
             <div id="camposNumericos"></div>
 
             <div class="form-actions">
@@ -568,6 +581,8 @@
               </select>
             </div>
             <button class="btn" id="btnAtualizarResumo">Atualizar resumo</button>
+            <!-- NOVO BOTÃO: GERAR PLANILHA DIÁRIA -->
+            <button class="btn" id="btnExportarCSV">Gerar planilha diária (CSV)</button>
           </div>
 
           <div id="semDadosResumo" class="muted">
@@ -594,6 +609,11 @@
 
     let editingKey = null;
     let editingLancamento = null;
+
+    // para exportar planilha diária
+    let ultimoMapaResumo = null;
+    let ultimoDataResumo = null;
+    let ultimoCidadeResumo = null;
 
     const GRUPOS = [
       {
@@ -681,7 +701,7 @@
       return arr;
     }
 
-    // 🔧 Ajustado para 3 casas decimais em maconha, crack e cocaína
+    // 3 casas decimais em maconha, crack e cocaína
     function formatValor(campoId, valor){
       if (["cocaina_kg","crack_kg","maconha_kg"].includes(campoId)){
         return Number(valor).toFixed(3);
@@ -827,6 +847,7 @@
       document.getElementById("cidade").value       = l.cidade || "";
       document.getElementById("viatura").value      = l.viatura || "";
       document.getElementById("re").value           = l.re || "";
+      document.getElementById("turno").value        = l.turno || "";
       getTodosCampos().forEach(c=>{
         const inp = document.getElementById("campo_"+c.id);
         if(!inp) return;
@@ -867,9 +888,10 @@
       const cidade       = document.getElementById("cidade").value;
       const viatura      = document.getElementById("viatura").value.trim();
       const re           = document.getElementById("re").value.trim();
+      const turno        = document.getElementById("turno").value;
 
-      if(!dataOperacao || !cidade || !viatura || !re){
-        mostrarAlertaForm("Preencha data, cidade, viatura e RE.", false);
+      if(!dataOperacao || !cidade || !viatura || !re || !turno){
+        mostrarAlertaForm("Preencha data, cidade, viatura, RE e turno.", false);
         return;
       }
 
@@ -886,6 +908,7 @@
         cidade,
         viatura,
         re,
+        turno,
         campos,
         criadoEm: editingLancamento && editingLancamento.criadoEm
           ? editingLancamento.criadoEm
@@ -916,6 +939,7 @@
     const dataResumoInput      = document.getElementById("dataResumo");
     const cidadeResumoSelect   = document.getElementById("cidadeResumo");
     const btnAtualizarResumo   = document.getElementById("btnAtualizarResumo");
+    const btnExportarCSV       = document.getElementById("btnExportarCSV");
     const semDadosResumo       = document.getElementById("semDadosResumo");
     const tabelasResumo        = document.getElementById("tabelasResumo");
     const resumoCampos         = document.getElementById("resumoCampos");
@@ -967,6 +991,11 @@
       const data         = dataResumoInput.value;
       const cidadeFiltro = cidadeResumoSelect.value;
 
+      // zera cache da planilha
+      ultimoMapaResumo = null;
+      ultimoDataResumo = null;
+      ultimoCidadeResumo = null;
+
       if(!data){
         semDadosResumo.textContent = "Selecione uma data para visualizar o resumo.";
         semDadosResumo.style.display = "block";
@@ -1013,11 +1042,16 @@
 
       montarResumoIndicadores(mapa);
 
+      // guarda para exportar CSV depois
+      ultimoMapaResumo = mapa;
+      ultimoDataResumo = data;
+      ultimoCidadeResumo = cidadeFiltro;
+
       tabelaDetalhes.innerHTML = "";
       const thead = document.createElement("thead");
       const trh   = document.createElement("tr");
 
-      ["Editar","Data","Município","Viatura","RE"].forEach(t=>{
+      ["Editar","Data","Município","Viatura","RE","Turno"].forEach(t=>{
         const th = document.createElement("th");
         th.textContent = t;
         trh.appendChild(th);
@@ -1043,7 +1077,13 @@
         tdEdit.appendChild(btnE);
         tr.appendChild(tdEdit);
 
-        const colsBase = [l.dataOperacao || "", l.cidade || "", l.viatura || "", l.re || ""];
+        const colsBase = [
+          l.dataOperacao || "",
+          l.cidade || "",
+          l.viatura || "",
+          l.re || "",
+          l.turno || ""
+        ];
         colsBase.forEach(v=>{
           const td = document.createElement("td");
           td.textContent = v;
@@ -1062,9 +1102,50 @@
       tabelaDetalhes.appendChild(tbody);
     }
 
+    // exporta CSV com o resultado total diário (resumo dos indicadores)
+    function exportarCSVResumo(){
+      if(!ultimoMapaResumo){
+        alert("Atualize o resumo antes de gerar a planilha diária.");
+        return;
+      }
+
+      const linhas = [];
+      const data = ultimoDataResumo || new Date().toISOString().slice(0,10);
+      const cidade = ultimoCidadeResumo || "Toda 2ª Companhia";
+
+      linhas.push(`Data;${data}`);
+      linhas.push(`Cidade;${cidade}`);
+      linhas.push("");
+      linhas.push("Nº;Indicador;Valor");
+
+      let contador = 1;
+      GRUPOS.forEach(grupo=>{
+        grupo.campos.forEach(c=>{
+          const numStr = String(contador).padStart(2,"0");
+          const val = ultimoMapaResumo[c.id] != null ? ultimoMapaResumo[c.id] : 0;
+          const valorFormatado = formatValor(c.id, val);
+          linhas.push(`${numStr};${c.label};${valorFormatado}`);
+          contador++;
+        });
+      });
+
+      const csvContent = linhas.join("\r\n");
+      const blob = new Blob([csvContent], {type:"text/csv;charset=utf-8;"});
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      const cidadeSafe = cidade.replace(/\s+/g,"_");
+      a.href = url;
+      a.download = `resultado_diario_${data}_${cidadeSafe}.csv`;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+    }
+
     btnAtualizarResumo.addEventListener("click", atualizarResumo);
     dataResumoInput.addEventListener("change", atualizarResumo);
     cidadeResumoSelect.addEventListener("change", atualizarResumo);
+    btnExportarCSV.addEventListener("click", exportarCSVResumo);
 
     document.addEventListener("DOMContentLoaded", ()=>{
       montarCamposNumericos();
