@@ -291,12 +291,8 @@
       margin-top:6px;
     }
 
-    /* ===================== MOBILE – ESPAÇAMENTO QUASE ZERO ===================== */
     @media (max-width:720px){
-
-      body{
-        padding:4px !important;
-      }
+      body{ padding:4px !important; }
 
       .shell{
         padding:6px 4px !important;
@@ -331,13 +327,9 @@
         letter-spacing:0.12em !important;
       }
 
-      .section{
-        margin-top:0 !important;
-      }
+      .section{ margin-top:0 !important; }
 
-      .card{
-        padding:6px 4px !important;
-      }
+      .card{ padding:6px 4px !important; }
 
       .card h2{
         font-size:0.9rem !important;
@@ -349,7 +341,6 @@
         margin:0 0 3px 0 !important;
       }
 
-      /* ---------- GERAL: campos em coluna compacta ---------- */
       .form-row{
         flex-direction:column !important;
         gap:0 !important;
@@ -399,7 +390,6 @@
         font-size:0.72rem !important;
       }
 
-      /* ---------- FILTROS VISUALIZAR ---------- */
       .filters{
         gap:0 !important;
         margin:0 0 4px 0 !important;
@@ -425,9 +415,6 @@
         font-size:0.7rem !important;
       }
 
-      /* 🔥 PONTO CRÍTICO: INSERIR E RESUMO SEM "CAIXA FANTASMA" ---------- */
-
-      /* some com os .form-row dentro dos blocos numéricos */
       #camposNumericos .form-row,
       #resumoCampos .form-row{
         display:contents !important;
@@ -524,7 +511,6 @@
               </div>
             </div>
 
-            <!-- NOVO CAMPO: TURNO -->
             <div class="form-row">
               <div class="field">
                 <label for="turno">Turno</label>
@@ -558,14 +544,26 @@
         <div class="card">
           <h2>Visualização de Resultados</h2>
           <p class="desc">
-            Filtre por data e, se desejar, por município. Abaixo você pode editar lançamentos por viatura.
+            Filtre por data e, se desejar, por município. Agora também é possível consultar por período.
           </p>
 
           <div class="filters">
+            <!-- CONSULTA POR DATA (já existia) -->
             <div class="field" style="max-width:220px;">
-              <label for="dataResumo">Data</label>
+              <label for="dataResumo">Data (única)</label>
               <input type="date" id="dataResumo">
             </div>
+
+            <!-- NOVO: CONSULTA POR PERÍODO -->
+            <div class="field" style="max-width:220px;">
+              <label for="dataInicio">Data inicial</label>
+              <input type="date" id="dataInicio">
+            </div>
+            <div class="field" style="max-width:220px;">
+              <label for="dataFim">Data final</label>
+              <input type="date" id="dataFim">
+            </div>
+
             <div class="field" style="max-width:260px;">
               <label for="cidadeResumo">Município / Companhia</label>
               <select id="cidadeResumo">
@@ -580,10 +578,13 @@
                 <option>Iepê</option>
               </select>
             </div>
-            <button class="btn" id="btnAtualizarResumo">Atualizar resumo</button>
-            <!-- NOVO BOTÃO: GERAR PLANILHA DIÁRIA -->
-            <button class="btn" id="btnExportarCSV">Gerar planilha diária (CSV)</button>
+
+            <button class="btn" id="btnAtualizarResumo">Atualizar (data)</button>
+            <button class="btn" id="btnAtualizarPeriodo">Atualizar (período)</button>
+            <button class="btn" id="btnExportarCSV">Gerar planilha (CSV)</button>
           </div>
+
+          <div id="rangeInfo" class="muted" style="display:none;"></div>
 
           <div id="semDadosResumo" class="muted">
             Nenhum lançamento encontrado para o filtro selecionado.
@@ -610,10 +611,12 @@
     let editingKey = null;
     let editingLancamento = null;
 
-    // para exportar planilha diária
+    // para exportar planilha
     let ultimoMapaResumo = null;
     let ultimoDataResumo = null;
     let ultimoCidadeResumo = null;
+    let ultimoPeriodoInicio = null;
+    let ultimoPeriodoFim = null;
 
     const GRUPOS = [
       {
@@ -701,12 +704,10 @@
       return arr;
     }
 
-    // 3 casas decimais em maconha, crack e cocaína
     function formatValor(campoId, valor){
       if (["cocaina_kg","crack_kg","maconha_kg"].includes(campoId)){
         return Number(valor).toFixed(3);
       }
-
       const meta = CAMPOS_MAP[campoId];
       if(meta && meta.step && meta.step.includes(".")){
         const casas = meta.step.split(".")[1].length;
@@ -829,8 +830,13 @@
       const hoje = new Date().toISOString().slice(0,10);
       const d1 = document.getElementById("dataOperacao");
       const d2 = document.getElementById("dataResumo");
+      const di = document.getElementById("dataInicio");
+      const df = document.getElementById("dataFim");
       if(d1 && !d1.value) d1.value = hoje;
       if(d2 && !d2.value) d2.value = hoje;
+      // período não forço por padrão para não confundir o operador
+      if(di && !di.value) di.value = "";
+      if(df && !df.value) df.value = "";
     }
 
     function limparFormulario(){
@@ -937,9 +943,15 @@
     });
 
     const dataResumoInput      = document.getElementById("dataResumo");
+    const dataInicioInput      = document.getElementById("dataInicio");
+    const dataFimInput         = document.getElementById("dataFim");
+    const rangeInfo            = document.getElementById("rangeInfo");
+
     const cidadeResumoSelect   = document.getElementById("cidadeResumo");
     const btnAtualizarResumo   = document.getElementById("btnAtualizarResumo");
+    const btnAtualizarPeriodo  = document.getElementById("btnAtualizarPeriodo");
     const btnExportarCSV       = document.getElementById("btnExportarCSV");
+
     const semDadosResumo       = document.getElementById("semDadosResumo");
     const tabelasResumo        = document.getElementById("tabelasResumo");
     const resumoCampos         = document.getElementById("resumoCampos");
@@ -987,65 +999,31 @@
       });
     }
 
-    async function atualizarResumo(){
-      const data         = dataResumoInput.value;
-      const cidadeFiltro = cidadeResumoSelect.value;
-
-      // zera cache da planilha
+    function resetCachePlanilha(){
       ultimoMapaResumo = null;
       ultimoDataResumo = null;
       ultimoCidadeResumo = null;
+      ultimoPeriodoInicio = null;
+      ultimoPeriodoFim = null;
+    }
 
-      if(!data){
-        semDadosResumo.textContent = "Selecione uma data para visualizar o resumo.";
-        semDadosResumo.style.display = "block";
-        tabelasResumo.style.display  = "none";
+    function setRangeInfo(txt){
+      if(!txt){
+        rangeInfo.style.display = "none";
+        rangeInfo.textContent = "";
         return;
       }
+      rangeInfo.style.display = "block";
+      rangeInfo.textContent = txt;
+    }
 
-      let lancamentos;
-      try{
-        const todos = await firebaseCarregarLancamentos();
-        lancamentos = todos.filter(l => l.dataOperacao === data);
-      }catch(err){
-        console.error(err);
-        semDadosResumo.textContent = "Erro ao carregar dados do Firebase.";
-        semDadosResumo.style.display = "block";
-        tabelasResumo.style.display  = "none";
-        return;
-      }
+    function emPeriodo(dataISO, iniISO, fimISO){
+      // dataISO/iniISO/fimISO em YYYY-MM-DD => comparação lexicográfica funciona
+      return dataISO >= iniISO && dataISO <= fimISO;
+    }
 
-      if(cidadeFiltro){
-        lancamentos = lancamentos.filter(l => l.cidade === cidadeFiltro);
-      }
-
-      if(lancamentos.length === 0){
-        semDadosResumo.textContent = "Nenhum lançamento encontrado para o filtro.";
-        semDadosResumo.style.display = "block";
-        tabelasResumo.style.display  = "none";
-        return;
-      }
-
-      semDadosResumo.style.display = "none";
-      tabelasResumo.style.display  = "block";
-
+    function montarTabelaDetalhes(lancamentos){
       const todosCampos = getTodosCampos();
-      const mapa = {};
-      todosCampos.forEach(c=>mapa[c.id]=0);
-
-      lancamentos.forEach(l=>{
-        todosCampos.forEach(c=>{
-          const v = parseFloat(l.campos && l.campos[c.id] != null ? l.campos[c.id] : 0) || 0;
-          mapa[c.id] += v;
-        });
-      });
-
-      montarResumoIndicadores(mapa);
-
-      // guarda para exportar CSV depois
-      ultimoMapaResumo = mapa;
-      ultimoDataResumo = data;
-      ultimoCidadeResumo = cidadeFiltro;
 
       tabelaDetalhes.innerHTML = "";
       const thead = document.createElement("thead");
@@ -1102,19 +1080,158 @@
       tabelaDetalhes.appendChild(tbody);
     }
 
-    // exporta CSV com o resultado total diário (resumo dos indicadores)
+    function somarMapa(lancamentos){
+      const todosCampos = getTodosCampos();
+      const mapa = {};
+      todosCampos.forEach(c=>mapa[c.id]=0);
+
+      lancamentos.forEach(l=>{
+        todosCampos.forEach(c=>{
+          const v = parseFloat(l.campos && l.campos[c.id] != null ? l.campos[c.id] : 0) || 0;
+          mapa[c.id] += v;
+        });
+      });
+
+      return mapa;
+    }
+
+    async function atualizarResumoPorData(){
+      const data         = dataResumoInput.value;
+      const cidadeFiltro = cidadeResumoSelect.value;
+
+      resetCachePlanilha();
+      setRangeInfo("");
+
+      if(!data){
+        semDadosResumo.textContent = "Selecione uma data para visualizar o resumo.";
+        semDadosResumo.style.display = "block";
+        tabelasResumo.style.display  = "none";
+        return;
+      }
+
+      let lancamentos;
+      try{
+        const todos = await firebaseCarregarLancamentos();
+        lancamentos = todos.filter(l => l.dataOperacao === data);
+      }catch(err){
+        console.error(err);
+        semDadosResumo.textContent = "Erro ao carregar dados do Firebase.";
+        semDadosResumo.style.display = "block";
+        tabelasResumo.style.display  = "none";
+        return;
+      }
+
+      if(cidadeFiltro){
+        lancamentos = lancamentos.filter(l => l.cidade === cidadeFiltro);
+      }
+
+      if(lancamentos.length === 0){
+        semDadosResumo.textContent = "Nenhum lançamento encontrado para o filtro.";
+        semDadosResumo.style.display = "block";
+        tabelasResumo.style.display  = "none";
+        return;
+      }
+
+      semDadosResumo.style.display = "none";
+      tabelasResumo.style.display  = "block";
+
+      const mapa = somarMapa(lancamentos);
+      montarResumoIndicadores(mapa);
+
+      // cache para CSV
+      ultimoMapaResumo = mapa;
+      ultimoDataResumo = data;
+      ultimoCidadeResumo = cidadeFiltro;
+
+      montarTabelaDetalhes(lancamentos);
+    }
+
+    async function atualizarResumoPorPeriodo(){
+      const ini         = dataInicioInput.value;
+      const fim         = dataFimInput.value;
+      const cidadeFiltro = cidadeResumoSelect.value;
+
+      resetCachePlanilha();
+
+      if(!ini || !fim){
+        semDadosResumo.textContent = "Preencha Data inicial e Data final para consultar por período.";
+        semDadosResumo.style.display = "block";
+        tabelasResumo.style.display  = "none";
+        setRangeInfo("");
+        return;
+      }
+
+      if(ini > fim){
+        semDadosResumo.textContent = "Período inválido: a data inicial não pode ser maior que a data final.";
+        semDadosResumo.style.display = "block";
+        tabelasResumo.style.display  = "none";
+        setRangeInfo("");
+        return;
+      }
+
+      let lancamentos;
+      try{
+        const todos = await firebaseCarregarLancamentos();
+        lancamentos = todos.filter(l => l.dataOperacao && emPeriodo(l.dataOperacao, ini, fim));
+      }catch(err){
+        console.error(err);
+        semDadosResumo.textContent = "Erro ao carregar dados do Firebase.";
+        semDadosResumo.style.display = "block";
+        tabelasResumo.style.display  = "none";
+        setRangeInfo("");
+        return;
+      }
+
+      if(cidadeFiltro){
+        lancamentos = lancamentos.filter(l => l.cidade === cidadeFiltro);
+      }
+
+      if(lancamentos.length === 0){
+        semDadosResumo.textContent = "Nenhum lançamento encontrado para o período/filtro.";
+        semDadosResumo.style.display = "block";
+        tabelasResumo.style.display  = "none";
+        setRangeInfo(`Período: ${ini} a ${fim}${cidadeFiltro ? " • " + cidadeFiltro : ""}`);
+        return;
+      }
+
+      semDadosResumo.style.display = "none";
+      tabelasResumo.style.display  = "block";
+
+      const mapa = somarMapa(lancamentos);
+      montarResumoIndicadores(mapa);
+
+      // cache CSV (marcando que é período)
+      ultimoMapaResumo = mapa;
+      ultimoCidadeResumo = cidadeFiltro;
+      ultimoPeriodoInicio = ini;
+      ultimoPeriodoFim = fim;
+
+      setRangeInfo(`Período: ${ini} a ${fim}${cidadeFiltro ? " • " + cidadeFiltro : ""}`);
+
+      montarTabelaDetalhes(lancamentos);
+    }
+
     function exportarCSVResumo(){
       if(!ultimoMapaResumo){
-        alert("Atualize o resumo antes de gerar a planilha diária.");
+        alert("Atualize o resumo antes de gerar a planilha.");
         return;
       }
 
       const linhas = [];
-      const data = ultimoDataResumo || new Date().toISOString().slice(0,10);
-      const cidade = ultimoCidadeResumo || "Toda 2ª Companhia";
 
-      linhas.push(`Data;${data}`);
-      linhas.push(`Cidade;${cidade}`);
+      const cidade = ultimoCidadeResumo || "Toda 2ª Companhia";
+      const cidadeSafe = cidade.replace(/\s+/g,"_");
+
+      // Se for período, coloca cabeçalho com intervalo
+      if(ultimoPeriodoInicio && ultimoPeriodoFim){
+        linhas.push(`Periodo;${ultimoPeriodoInicio} a ${ultimoPeriodoFim}`);
+        linhas.push(`Cidade;${cidade}`);
+      }else{
+        const data = ultimoDataResumo || new Date().toISOString().slice(0,10);
+        linhas.push(`Data;${data}`);
+        linhas.push(`Cidade;${cidade}`);
+      }
+
       linhas.push("");
       linhas.push("Nº;Indicador;Valor");
 
@@ -1133,18 +1250,35 @@
       const blob = new Blob([csvContent], {type:"text/csv;charset=utf-8;"});
       const url = URL.createObjectURL(blob);
       const a = document.createElement("a");
-      const cidadeSafe = cidade.replace(/\s+/g,"_");
+
       a.href = url;
-      a.download = `resultado_diario_${data}_${cidadeSafe}.csv`;
+
+      if(ultimoPeriodoInicio && ultimoPeriodoFim){
+        a.download = `resultado_periodo_${ultimoPeriodoInicio}_a_${ultimoPeriodoFim}_${cidadeSafe}.csv`;
+      }else{
+        const data = ultimoDataResumo || new Date().toISOString().slice(0,10);
+        a.download = `resultado_diario_${data}_${cidadeSafe}.csv`;
+      }
+
       document.body.appendChild(a);
       a.click();
       document.body.removeChild(a);
       URL.revokeObjectURL(url);
     }
 
-    btnAtualizarResumo.addEventListener("click", atualizarResumo);
-    dataResumoInput.addEventListener("change", atualizarResumo);
-    cidadeResumoSelect.addEventListener("change", atualizarResumo);
+    btnAtualizarResumo.addEventListener("click", atualizarResumoPorData);
+    btnAtualizarPeriodo.addEventListener("click", atualizarResumoPorPeriodo);
+
+    // Mantém o comportamento antigo: ao mudar a DATA ÚNICA, atualiza automaticamente
+    dataResumoInput.addEventListener("change", atualizarResumoPorData);
+    cidadeResumoSelect.addEventListener("change", ()=>{
+      // se tem período preenchido, atualiza por período; senão por data
+      const ini = dataInicioInput.value;
+      const fim = dataFimInput.value;
+      if(ini && fim) atualizarResumoPorPeriodo();
+      else atualizarResumoPorData();
+    });
+
     btnExportarCSV.addEventListener("click", exportarCSVResumo);
 
     document.addEventListener("DOMContentLoaded", ()=>{
